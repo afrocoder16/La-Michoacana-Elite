@@ -1563,114 +1563,122 @@ const REVIEWS = [
 
 // ============================ PROMO SPOTLIGHT ============================
 (function(){
-  // Intentionally flat so each field can map 1:1 to future Google Sheet columns.
-  const FEATURED_PROMO = {
-    id:"fresh-weekend-drop",
-    status_label:"This weekend",
-    eyebrow:"Featured Drop",
-    headline_top:"Fresh",
-    headline_accent:"Weekend",
-    headline_bottom:"Drop",
-    summary:"Two crowd-pullers in one campaign: a cooling cucumber-lime paleta and a loud, crunchy walking taco. Built for screenshot energy, quick stops, and fast sellouts.",
-    hero_image_src:"assets/promo/fresh-weekend-drop.svg",
-    hero_image_alt:"Promo flyer featuring Pepino Limon and Walking Tacos.",
-    urgency_badge:"Limited weekend run",
-    primary_cta_label:"See the menu",
-    primary_cta_href:"#menu",
-    secondary_cta_label:"Visit tonight",
-    secondary_cta_href:"#visit",
-    meta_1_label:"Run",
-    meta_1_value:"Weekend only",
-    meta_2_label:"Vibe",
-    meta_2_value:"Cold + crunchy",
-    meta_3_label:"Best for",
-    meta_3_value:"Bring your crew",
-    item_1_name:"Pepino Limon",
-    item_1_description:"Cooling cucumber-lime paleta with a bright, clean finish and serious refresh factor.",
-    item_1_highlight:"bright / icy / refreshing",
-    item_2_name:"Walking Tacos",
-    item_2_description:"Doritos bag loaded with seasoned beef, cheese, lettuce, tomato, and full snack-table crunch.",
-    item_2_highlight:"savory / crunchy / late-night favorite",
+  // Fallback content — shown if Google Sheet fetch fails or is not configured
+  const FALLBACK_PROMO = {
+    status_label:"This Month",
+    eyebrow:"This Month · Special Offer",
+    headline_top:"MOTHER'S",
+    headline_accent:"Day",
+    headline_bottom:"SPECIAL",
+    summary:"Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.",
+    hero_image_src:"assets/promo/promo-featured.jpg",
+    hero_image_alt:"Mother's Day Special promo flyer.",
+    urgency_badge:"While supplies last",
+    primary_cta_label:"Order Now",
+    primary_cta_href:"#order",
+    secondary_cta_label:"See Full Menu",
+    secondary_cta_href:"#menu",
+    tag1_label:"FREE",
+    tag1_sub:"treat for moms",
+    tag2_label:"MANGONADAS",
+    tag2_sub:"fruit cups & more",
+    tag3_label:"ELOTES",
+    tag3_sub:"aguas frescas",
+    image_url:"assets/promo/promo-featured.jpg",
+    order_link:"#order",
   };
-  window.FEATURED_PROMO = FEATURED_PROMO;
+
+  // ── Paste your published Google Sheet CSV URL below ──────────────────────
+  // Leave blank ("") to always use the fallback above.
+  const SHEET_CSV_URL = "";
+  // ─────────────────────────────────────────────────────────────────────────
 
   const root = document.getElementById('promoSpotlight');
   if (!root) return;
 
-  const promo = FEATURED_PROMO;
-  const esc = value => String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+  const esc = v => String(v ?? "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 
-  const meta = [
-    { label: promo.meta_1_label, value: promo.meta_1_value },
-    { label: promo.meta_2_label, value: promo.meta_2_value },
-    { label: promo.meta_3_label, value: promo.meta_3_value },
-  ].filter(item => item.label && item.value);
+  function parseCSV(text) {
+    const [headerLine, ...rows] = text.trim().split("\n");
+    const headers = headerLine.split(",").map(h => h.trim().replace(/^"|"$/g,""));
+    const data = {};
+    if (!rows.length) return null;
+    // Use first data row only
+    const values = [];
+    let cur = "", inQuote = false;
+    for (const ch of rows[0]) {
+      if (ch === '"') { inQuote = !inQuote; }
+      else if (ch === "," && !inQuote) { values.push(cur.trim()); cur = ""; }
+      else { cur += ch; }
+    }
+    values.push(cur.trim());
+    headers.forEach((h, i) => { data[h] = (values[i] ?? "").replace(/^"|"$/g,""); });
+    return data;
+  }
 
-  const items = [
-    {
-      kicker: "Featured item",
-      name: promo.item_1_name,
-      description: promo.item_1_description,
-      highlight: promo.item_1_highlight,
-    },
-    promo.item_2_name ? {
-      kicker: "Bonus pick",
-      name: promo.item_2_name,
-      description: promo.item_2_description,
-      highlight: promo.item_2_highlight,
-    } : null,
-  ].filter(Boolean);
+  function render(promo) {
+    const tags = [
+      { label: promo.tag1_label, sub: promo.tag1_sub },
+      { label: promo.tag2_label, sub: promo.tag2_sub },
+      { label: promo.tag3_label, sub: promo.tag3_sub },
+    ].filter(t => t.label);
 
-  root.innerHTML = `
-    <div class="poster-copy">
-      <div class="poster-eyebrow"><span class="bar"></span><span>${esc(promo.eyebrow)}</span></div>
-      <div class="poster-status-row">
-        <span class="poster-status-pill">${esc(promo.status_label)}</span>
-        <span class="poster-urgency">${esc(promo.urgency_badge)}</span>
+    const imgSrc = promo.image_url || promo.hero_image_src || "";
+    const orderHref = promo.order_link || promo.primary_cta_href || "#order";
+
+    // Split title into up to 3 lines on " / " or newline, else wrap at first space
+    const titleParts = (promo.title || (promo.headline_top + " " + promo.headline_accent + " " + promo.headline_bottom))
+      .split(/\s*\/\s*|\n/).map(s => s.trim()).filter(Boolean);
+    while (titleParts.length < 1) titleParts.push("");
+    const [line1 = "", line2 = "", line3 = ""] = titleParts;
+
+    root.innerHTML = `
+      <div class="poster-copy">
+        <div class="poster-eyebrow"><span class="bar"></span><span>${esc(promo.eyebrow || "THIS MONTH · SPECIAL OFFER")}</span></div>
+        <div class="poster-status-row">
+          <span class="poster-status-pill">${esc(promo.status_label || "This Month")}</span>
+          ${promo.urgency_badge ? `<span class="poster-urgency">${esc(promo.urgency_badge)}</span>` : ""}
+        </div>
+        <h2 class="poster-name">
+          <span class="poster-line poster-line-top">${esc(line1)}</span>
+          ${line2 ? `<span class="poster-line poster-line-accent">${esc(line2)}</span>` : ""}
+          ${line3 ? `<span class="poster-line poster-line-bottom">${esc(line3)}</span>` : ""}
+        </h2>
+        <p class="poster-deck">${esc(promo.description || promo.summary || "")}</p>
+        <div class="poster-meta">
+          ${tags.map(t => `<div><b>${esc(t.label)}</b><span>${esc(t.sub)}</span></div>`).join("")}
+        </div>
+        <div class="poster-cta-row hero-ctas">
+          <a class="btn btn-primary" href="${esc(orderHref)}">${esc(promo.primary_cta_label || "Order Now")} -></a>
+          <a class="btn btn-ghost" href="${esc(promo.secondary_cta_href || "#menu")}">${esc(promo.secondary_cta_label || "See Full Menu")}</a>
+        </div>
       </div>
-      <h2 class="poster-name">
-        <span class="poster-line poster-line-top">${esc(promo.headline_top)}</span>
-        <span class="poster-line poster-line-accent">${esc(promo.headline_accent)}</span>
-        <span class="poster-line poster-line-bottom">${esc(promo.headline_bottom)}</span>
-      </h2>
-      <p class="poster-deck">${esc(promo.summary)}</p>
-      <div class="poster-meta">
-        ${meta.map(item => `
-          <div>
-            <span>${esc(item.label)}</span>
-            <b>${esc(item.value)}</b>
-          </div>
-        `).join("")}
+      <div class="poster-visual">
+        ${promo.urgency_badge ? `<span class="poster-badge">${esc(promo.urgency_badge)}</span>` : ""}
+        <span class="poster-scribble s1">this month</span>
+        <span class="poster-scribble s2">come hungry</span>
+        <div class="poster-image-shell">
+          <img class="poster-image" src="${esc(imgSrc)}" alt="${esc(promo.hero_image_alt || "Promo image")}" loading="lazy"
+               onerror="this.closest('.poster-image-shell').style.display='none'"/>
+        </div>
+        <p class="poster-promo-caption">★ Share this with the group chat ★</p>
       </div>
-      <div class="poster-items">
-        ${items.map(item => `
-          <article class="poster-item">
-            <span class="poster-item-kicker">${esc(item.kicker)}</span>
-            <h3 class="poster-item-name">${esc(item.name)}</h3>
-            <p class="poster-item-desc">${esc(item.description)}</p>
-            <div class="poster-item-highlight">${esc(item.highlight)}</div>
-          </article>
-        `).join("")}
-      </div>
-      <div class="poster-cta-row hero-ctas">
-        <a class="btn btn-primary" href="${esc(promo.primary_cta_href)}">${esc(promo.primary_cta_label)} -></a>
-        <a class="btn btn-ghost" href="${esc(promo.secondary_cta_href)}">${esc(promo.secondary_cta_label)}</a>
-      </div>
-    </div>
-    <div class="poster-visual">
-      <span class="poster-badge">${esc(promo.urgency_badge)}</span>
-      <span class="poster-scribble s1">fresh drop</span>
-      <span class="poster-scribble s2">come hungry</span>
-      <div class="poster-image-shell">
-        <img class="poster-image" src="${esc(promo.hero_image_src)}" alt="${esc(promo.hero_image_alt)}" loading="lazy"/>
-      </div>
-    </div>
-  `;
+    `;
+  }
+
+  if (SHEET_CSV_URL) {
+    fetch(SHEET_CSV_URL)
+      .then(r => { if (!r.ok) throw new Error("fetch failed"); return r.text(); })
+      .then(text => {
+        const data = parseCSV(text);
+        render(data && data.title ? data : FALLBACK_PROMO);
+      })
+      .catch(() => render(FALLBACK_PROMO));
+  } else {
+    render(FALLBACK_PROMO);
+  }
 })();
 
 // ============================ VENDING MACHINE ============================
