@@ -1563,33 +1563,17 @@ const REVIEWS = [
 
 // ============================ PROMO SPOTLIGHT ============================
 (function(){
-  // Fallback content — shown if Google Sheet fetch fails or is not configured
-  const FALLBACK_PROMO = {
-    status_label:"This Month",
-    eyebrow:"This Month · Special Offer",
-    headline_top:"MOTHER'S",
-    headline_accent:"Day",
-    headline_bottom:"SPECIAL",
-    summary:"Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.",
-    hero_image_src:"assets/promo/promo-featured.jpg",
-    hero_image_alt:"Mother's Day Special promo flyer.",
-    urgency_badge:"While supplies last",
-    primary_cta_label:"Order Now",
-    primary_cta_href:"#order",
-    secondary_cta_label:"See Full Menu",
-    secondary_cta_href:"#menu",
-    tag1_label:"FREE",
-    tag1_sub:"treat for moms",
-    tag2_label:"MANGONADAS",
-    tag2_sub:"fruit cups & more",
-    tag3_label:"ELOTES",
-    tag3_sub:"aguas frescas",
+  // Fallback — used when sheet is not configured or fetch fails
+  // 5 columns: title, description, image_url, order_link, badge
+  const FALLBACK = {
+    title:"MOTHER'S / Day / SPECIAL",
+    description:"Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.",
     image_url:"assets/promo/promo-featured.jpg",
     order_link:"#order",
+    badge:"While supplies last",
   };
 
-  // ── Paste your published Google Sheet CSV URL below ──────────────────────
-  // Leave blank ("") to always use the fallback above.
+  // ── Paste your published Google Sheet CSV URL here ───────────────────────
   const SHEET_CSV_URL = "";
   // ─────────────────────────────────────────────────────────────────────────
 
@@ -1602,10 +1586,8 @@ const REVIEWS = [
 
   function parseCSV(text) {
     const [headerLine, ...rows] = text.trim().split("\n");
-    const headers = headerLine.split(",").map(h => h.trim().replace(/^"|"$/g,""));
-    const data = {};
     if (!rows.length) return null;
-    // Use first data row only
+    const headers = headerLine.split(",").map(h => h.trim().replace(/^"|"$/g,""));
     const values = [];
     let cur = "", inQuote = false;
     for (const ch of rows[0]) {
@@ -1614,53 +1596,38 @@ const REVIEWS = [
       else { cur += ch; }
     }
     values.push(cur.trim());
+    const data = {};
     headers.forEach((h, i) => { data[h] = (values[i] ?? "").replace(/^"|"$/g,""); });
     return data;
   }
 
-  function render(promo) {
-    const tags = [
-      { label: promo.tag1_label, sub: promo.tag1_sub },
-      { label: promo.tag2_label, sub: promo.tag2_sub },
-      { label: promo.tag3_label, sub: promo.tag3_sub },
-    ].filter(t => t.label);
-
-    const imgSrc = promo.image_url || promo.hero_image_src || "";
-    const orderHref = promo.order_link || promo.primary_cta_href || "#order";
-
-    // Split title into up to 3 lines on " / " or newline, else wrap at first space
-    const titleParts = (promo.title || (promo.headline_top + " " + promo.headline_accent + " " + promo.headline_bottom))
-      .split(/\s*\/\s*|\n/).map(s => s.trim()).filter(Boolean);
-    while (titleParts.length < 1) titleParts.push("");
-    const [line1 = "", line2 = "", line3 = ""] = titleParts;
-
+  function render(p) {
+    // title supports up to 3 color lines split by " / "
+    const [line1 = "", line2 = "", line3 = ""] = p.title.split(/\s*\/\s*/).map(s => s.trim());
     root.innerHTML = `
       <div class="poster-copy">
-        <div class="poster-eyebrow"><span class="bar"></span><span>${esc(promo.eyebrow || "THIS MONTH · SPECIAL OFFER")}</span></div>
+        <div class="poster-eyebrow"><span class="bar"></span><span>THIS MONTH · SPECIAL OFFER</span></div>
         <div class="poster-status-row">
-          <span class="poster-status-pill">${esc(promo.status_label || "This Month")}</span>
-          ${promo.urgency_badge ? `<span class="poster-urgency">${esc(promo.urgency_badge)}</span>` : ""}
+          <span class="poster-status-pill">This Month</span>
+          ${p.badge ? `<span class="poster-urgency">${esc(p.badge)}</span>` : ""}
         </div>
         <h2 class="poster-name">
           <span class="poster-line poster-line-top">${esc(line1)}</span>
           ${line2 ? `<span class="poster-line poster-line-accent">${esc(line2)}</span>` : ""}
           ${line3 ? `<span class="poster-line poster-line-bottom">${esc(line3)}</span>` : ""}
         </h2>
-        <p class="poster-deck">${esc(promo.description || promo.summary || "")}</p>
-        <div class="poster-meta">
-          ${tags.map(t => `<div><b>${esc(t.label)}</b><span>${esc(t.sub)}</span></div>`).join("")}
-        </div>
+        <p class="poster-deck">${esc(p.description)}</p>
         <div class="poster-cta-row hero-ctas">
-          <a class="btn btn-primary" href="${esc(orderHref)}">${esc(promo.primary_cta_label || "Order Now")} -></a>
-          <a class="btn btn-ghost" href="${esc(promo.secondary_cta_href || "#menu")}">${esc(promo.secondary_cta_label || "See Full Menu")}</a>
+          <a class="btn btn-primary" href="${esc(p.order_link || "#order")}">Order Now -></a>
+          <a class="btn btn-ghost" href="#menu">See Full Menu</a>
         </div>
       </div>
       <div class="poster-visual">
-        ${promo.urgency_badge ? `<span class="poster-badge">${esc(promo.urgency_badge)}</span>` : ""}
+        ${p.badge ? `<span class="poster-badge">${esc(p.badge)}</span>` : ""}
         <span class="poster-scribble s1">this month</span>
         <span class="poster-scribble s2">come hungry</span>
         <div class="poster-image-shell">
-          <img class="poster-image" src="${esc(imgSrc)}" alt="${esc(promo.hero_image_alt || "Promo image")}" loading="lazy"
+          <img class="poster-image" src="${esc(p.image_url)}" alt="Promo image" loading="lazy"
                onerror="this.closest('.poster-image-shell').style.display='none'"/>
         </div>
         <p class="poster-promo-caption">★ Share this with the group chat ★</p>
@@ -1670,14 +1637,11 @@ const REVIEWS = [
 
   if (SHEET_CSV_URL) {
     fetch(SHEET_CSV_URL)
-      .then(r => { if (!r.ok) throw new Error("fetch failed"); return r.text(); })
-      .then(text => {
-        const data = parseCSV(text);
-        render(data && data.title ? data : FALLBACK_PROMO);
-      })
-      .catch(() => render(FALLBACK_PROMO));
+      .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+      .then(text => { const d = parseCSV(text); render(d && d.title ? d : FALLBACK); })
+      .catch(() => render(FALLBACK));
   } else {
-    render(FALLBACK_PROMO);
+    render(FALLBACK);
   }
 })();
 
