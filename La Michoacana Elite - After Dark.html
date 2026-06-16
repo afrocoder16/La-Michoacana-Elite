@@ -3,7 +3,25 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>LA MICHOACANA ELITE ★ AFTER DARK</title>
+<title>La Michoacana Elite — Mangonadas, Paletas & Antojitos in Marshall, MN</title>
+<meta name="description" content="La Michoacana Elite in Marshall, MN — authentic mangonadas, paletas, raspados, walking tacos, quesabirrias and more. Made fresh in-house. Open late. Call (507) 401-3162." />
+<meta name="theme-color" content="#0A0710" />
+<link rel="canonical" href="https://afrocoder16.github.io/La-Michoacana-Elite/" />
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="La Michoacana Elite" />
+<meta property="og:title" content="La Michoacana Elite — Mangonadas, Paletas & Antojitos in Marshall, MN" />
+<meta property="og:description" content="Authentic mangonadas, paletas, raspados, walking tacos & quesabirrias. Made fresh in-house in Marshall, MN. Open late." />
+<meta property="og:image" content="https://afrocoder16.github.io/La-Michoacana-Elite/assets/logo/logo-removebg.png" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="La Michoacana Elite — Marshall, MN" />
+<meta name="twitter:description" content="Authentic mangonadas, paletas, raspados & antojitos. Made fresh in-house. Open late." />
+<meta name="twitter:image" content="https://afrocoder16.github.io/La-Michoacana-Elite/assets/logo/logo-removebg.png" />
+
 <link rel="icon" type="image/png" href="assets/logo/logo-removebg.png" />
 <template id="__bundler_thumbnail" data-bg-color="#FAF3E6">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -122,11 +140,20 @@
     background:var(--hot);color:var(--bone);padding:11px 16px;border-radius:999px;text-decoration:none;
     box-shadow:0 0 0 2px var(--ink), 4px 4px 0 var(--acid);transition:transform .15s}
   .nav-cta:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 2px var(--ink), 6px 6px 0 var(--acid)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .lang-toggle{display:inline-flex;align-items:center;gap:2px;background:rgba(127,127,127,.16);
+    border:1.5px solid var(--bone);border-radius:999px;padding:2px;flex-shrink:0}
+  .lang-toggle button{appearance:none;cursor:pointer;background:transparent;border:0;color:var(--bone);
+    font-family:"Space Mono",monospace;font-weight:900;font-size:10px;letter-spacing:.1em;
+    padding:5px 9px;border-radius:999px;transition:.15s;line-height:1}
+  .lang-toggle button.is-on{background:var(--bone);color:var(--ink)}
   @media (max-width:640px){
     .nav{padding:12px 16px}
     .nav-links{display:none}
     .nav-brand{font-size:13px}
     .nav-logo{width:44px;height:44px}
+    .nav-cta{padding:9px 12px;font-size:11px}
+    .lang-toggle button{padding:5px 7px}
   }
 
   /* HERO */
@@ -641,7 +668,7 @@
     position:relative;text-wrap:pretty}
   .story-q::before{content:"";position:absolute;top:-12px;left:24px;height:4px;width:80px;background:var(--acid);
     box-shadow:0 0 12px var(--acid)}
-  .story-q span{display:block;margin-top:14px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;font-weight:400}
+  .story-q span:not(.story-q-text){display:block;margin-top:14px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;font-weight:400}
 
   .polaroids{position:relative;height:600px}
   @media (max-width:900px){.polaroids{height:520px}}
@@ -983,11 +1010,117 @@
   @media print{body > *{display:none!important}.builder{display:block!important;background:#fff;padding:0}.bld-inner{display:block!important}.bld-hero-h,.bld-eyebrow,.bld-stage .bld-panel,.bld-stage .bld-cup-col{display:none!important}.bld-stage{display:block!important}.bld-receipt{display:block!important;box-shadow:none;border:1px solid #ddd;max-width:320px;margin:20px auto;padding:20px 18px}.bld-receipt::before,.bld-receipt::after{display:none}.bld-rcpt-print{display:none!important}}
   .pol-img img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px}
 
+  /* ============================ SHOPPING CART ============================ */
+  /* Floating cart button (bottom-right, mirrors .call-float) */
+  .cart-fab{position:fixed;bottom:24px;right:24px;z-index:9991;display:inline-flex;align-items:center;gap:10px;
+    background:var(--hot);color:#fff;font-family:"Bowlby One",sans-serif;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+    padding:13px 20px;border:0;border-radius:999px;cursor:pointer;
+    box-shadow:0 0 0 3px var(--ink),0 0 0 5px var(--hot),0 8px 22px rgba(232,51,111,.5);
+    transform:translateY(120px);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.2,.9,.3,1),opacity .25s}
+  .cart-fab.visible{transform:translateY(0);opacity:1;pointer-events:auto}
+  .cart-fab:hover{transform:translateY(-2px)}
+  .cart-fab .cart-fab-ico{font-size:16px;line-height:1}
+  .cart-fab .cart-fab-total{font-family:"Space Mono",monospace;font-weight:700;font-size:13px}
+  .cart-fab .cart-fab-count{position:absolute;top:-8px;right:-6px;min-width:22px;height:22px;padding:0 6px;
+    background:var(--acid);color:var(--ink);border:2px solid var(--ink);border-radius:999px;
+    font-family:"Space Mono",monospace;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;
+    transition:transform .2s}
+  .cart-fab.bump .cart-fab-count{animation:cart-bump .4s ease}
+  @keyframes cart-bump{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+  @media (max-width:640px){.cart-fab{bottom:16px;right:16px;padding:12px 16px}}
+
+  /* Overlay + drawer */
+  .cart-overlay{position:fixed;inset:0;z-index:9994;background:rgba(10,7,16,.55);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .3s}
+  .cart-overlay.open{opacity:1;pointer-events:auto}
+  .cart-drawer{position:fixed;top:0;right:0;z-index:9995;height:100dvh;width:min(420px,100vw);
+    background:var(--ink);color:var(--bone);border-left:2px solid var(--acid);
+    display:flex;flex-direction:column;transform:translateX(105%);transition:transform .35s cubic-bezier(.2,.9,.3,1);
+    box-shadow:-12px 0 40px rgba(0,0,0,.4)}
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-hd{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1.5px solid var(--line);flex-shrink:0}
+  .cart-hd h3{margin:0;font-family:"Bowlby One",sans-serif;font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+  .cart-hd .cart-hd-count{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;display:block;margin-top:4px}
+  .cart-x{appearance:none;background:transparent;border:0;color:var(--bone);font-size:24px;line-height:1;cursor:pointer;
+    width:34px;height:34px;border-radius:8px;flex-shrink:0;transition:.15s}
+  .cart-x:hover{background:rgba(255,255,255,.1)}
+  .cart-body{flex:1;overflow-y:auto;padding:8px 22px}
+  .cart-empty{text-align:center;font-family:"Space Mono",monospace;font-size:13px;opacity:.6;padding:48px 12px;line-height:1.6}
+  .cart-line{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px dashed var(--line)}
+  .cart-line-sw{width:42px;height:42px;border-radius:10px;flex-shrink:0;border:1.5px solid rgba(255,255,255,.18);
+    display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden}
+  .cart-line-sw img{width:100%;height:100%;object-fit:cover}
+  .cart-line-info{flex:1;min-width:0}
+  .cart-line-name{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14px;line-height:1.2}
+  .cart-line-unit{font-family:"Space Mono",monospace;font-size:11px;opacity:.6;margin-top:2px}
+  .cart-qty{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .cart-qty button{appearance:none;background:transparent;border:0;color:var(--bone);width:28px;height:28px;cursor:pointer;font-size:16px;line-height:1;transition:.15s}
+  .cart-qty button:hover{background:var(--acid);color:var(--ink)}
+  .cart-qty .cart-qty-n{font-family:"Space Mono",monospace;font-weight:700;font-size:13px;min-width:24px;text-align:center}
+  .cart-line-tot{font-family:"Space Mono",monospace;font-weight:700;font-size:13px;min-width:54px;text-align:right;flex-shrink:0}
+  .cart-ft{flex-shrink:0;padding:18px 22px calc(18px + env(safe-area-inset-bottom));border-top:1.5px solid var(--line);background:var(--ink)}
+  .cart-sub-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .cart-sub-row .cart-sub-l{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+  .cart-sub-row .cart-sub-v{font-family:"Bowlby One",sans-serif;font-size:26px;color:var(--acid)}
+  .cart-checkout{display:block;width:100%;appearance:none;border:0;cursor:pointer;
+    background:var(--hot);color:#fff;font-family:"Bowlby One",sans-serif;font-size:16px;letter-spacing:.03em;text-transform:uppercase;
+    padding:16px;border-radius:14px;box-shadow:0 0 0 2px var(--ink),4px 4px 0 var(--acid);transition:transform .15s,box-shadow .15s}
+  .cart-checkout:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 2px var(--ink),6px 6px 0 var(--acid)}
+  .cart-checkout:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:0 0 0 2px var(--ink),4px 4px 0 var(--acid)}
+  .cart-clear{display:block;width:100%;margin-top:10px;appearance:none;background:transparent;border:0;cursor:pointer;
+    color:var(--bone);opacity:.55;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px;transition:.15s}
+  .cart-clear:hover{opacity:1;color:var(--hot)}
+  /* Checkout confirmation */
+  .cart-confirm{position:absolute;inset:0;z-index:2;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:32px;gap:14px;opacity:0;pointer-events:none;transition:opacity .3s}
+  .cart-confirm.show{opacity:1;pointer-events:auto}
+  .cart-confirm-ico{font-size:54px;animation:cart-bump .5s ease}
+  .cart-confirm h4{margin:0;font-family:"Bowlby One",sans-serif;font-size:22px;text-transform:uppercase;color:var(--acid)}
+  .cart-confirm p{margin:0;font-family:"Bricolage Grotesque",sans-serif;font-size:15px;opacity:.85;max-width:280px;line-height:1.45}
+  .cart-confirm small{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5;margin-top:6px}
+  .cart-confirm-spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--acid);border-radius:50%;animation:cart-spin .8s linear infinite;margin-top:6px}
+  @keyframes cart-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.cart-fab,.cart-overlay,.cart-drawer,.cart-confirm{transition:none}.cart-confirm-ico{animation:none}.cart-confirm-spin{animation-duration:1.4s}}
+
 </style>
 </head>
 <body data-mode="midnight" data-calm="0">
 
 <a href="tel:5074013162" class="call-float" id="callFloat" aria-label="Call us">📞 CALL US</a>
+
+<!-- SHOPPING CART (placeholder checkout → DoorDash until Phase 2 / Clover) -->
+<button class="cart-fab" id="cartFab" aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
+  <span class="cart-fab-ico" aria-hidden="true">🛒</span>
+  <span class="cart-fab-label" data-i18n="cart.fab">Cart</span>
+  <span class="cart-fab-total" id="cartFabTotal">$0.00</span>
+  <span class="cart-fab-count" id="cartFabCount">0</span>
+</button>
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+  <div class="cart-hd">
+    <div>
+      <h3 id="cartTitle" data-i18n="cart.title">Your Cart</h3>
+      <span class="cart-hd-count" id="cartHdCount"></span>
+    </div>
+    <button class="cart-x" id="cartClose" aria-label="Close" data-i18n-aria="cart.close">×</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-ft">
+    <div class="cart-sub-row">
+      <span class="cart-sub-l" data-i18n="cart.subtotal">Subtotal</span>
+      <span class="cart-sub-v" id="cartSubtotal">$0.00</span>
+    </div>
+    <button class="cart-checkout" id="cartCheckout" data-i18n="cart.checkout">Checkout →</button>
+    <button class="cart-clear" id="cartClear" data-i18n="cart.clear">Clear cart</button>
+  </div>
+  <div class="cart-confirm" id="cartConfirm" aria-live="polite">
+    <span class="cart-confirm-ico" aria-hidden="true">🎉</span>
+    <h4 id="cartConfirmTitle" data-i18n="cart.confirm.title">Order saved! 🎉</h4>
+    <p id="cartConfirmMsg" data-i18n="cart.confirm.msg">Taking you to DoorDash to finish your order…</p>
+    <div class="cart-confirm-spin" aria-hidden="true"></div>
+    <small data-i18n="cart.confirm.note">Direct checkout is coming soon.</small>
+  </div>
+</aside>
 
 <!-- TWEAKS -->
 <div class="tw" id="tw">
@@ -1036,13 +1169,19 @@
     <span>MICHOACANA<b> ★ </b>ELITE</span>
   </a>
   <div class="nav-links">
-    <a href="#menu">Menu</a>
-    <a href="#flavor">This Month</a>
-    <a href="#builder">Lab</a>
-    <a href="#story">Story</a>
-    <a href="#visit">Visit</a>
+    <a href="#menu" data-i18n="nav.menu">Menu</a>
+    <a href="#flavor" data-i18n="nav.month">This Month</a>
+    <a href="#builder" data-i18n="nav.lab">Lab</a>
+    <a href="#story" data-i18n="nav.story">Story</a>
+    <a href="#visit" data-i18n="nav.visit">Visit</a>
   </div>
-  <a href="#order" class="nav-cta">Order →</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+    <a href="#order" class="nav-cta" data-i18n="nav.order">Order →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1051,9 +1190,9 @@
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="blink"></span>
-      <span>Marshall, MN · 12pm — Close</span>
+      <span data-i18n="hero.eyebrow">Marshall, MN · 12pm — Close</span>
       <span class="status-badge status-closed" id="heroStatus">
-        <span class="status-dot"></span><span class="status-text">CHECKING...</span>
+        <span class="status-dot"></span><span class="status-text" data-i18n="hero.status.checking">CHECKING...</span>
       </span>
     </div>
 
@@ -1066,23 +1205,23 @@
 
     <div class="hero-foot">
       <div>
-        <p class="hero-sub">Real-fruit paletas, hand-scooped ice cream, mangonadas worth driving for. The shop your group chat keeps screenshot-ing.</p>
+        <p class="hero-sub" data-i18n="hero.sub">Real-fruit paletas, hand-scooped ice cream, mangonadas worth driving for. The shop your group chat keeps screenshot-ing.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#menu">See the menu →</a>
-          <a class="btn btn-ghost" href="#builder">Build a mangonada</a>
+          <a class="btn btn-primary" href="#menu" data-i18n="hero.cta.menu">See the menu →</a>
+          <a class="btn btn-ghost" href="#builder" data-i18n="hero.cta.build">Build a mangonada</a>
         </div>
       </div>
       <div class="hero-stats">
-        <div class="row"><b class="c1">18</b><span>flavors on rotation</span></div>
-        <div class="row"><b class="c2">4.8★</b><span>doordash · 200+ reviews</span></div>
-        <div class="row"><b class="c3">100%</b><span>made in-house · made fresh</span></div>
+        <div class="row"><b class="c1">18</b><span data-i18n="hero.stat.flavors">flavors on rotation</span></div>
+        <div class="row"><b class="c2">4.8★</b><span data-i18n="hero.stat.reviews">doordash · 200+ reviews</span></div>
+        <div class="row"><b class="c3">100%</b><span data-i18n="hero.stat.inhouse">made in-house · made fresh</span></div>
       </div>
     </div>
   </div>
 
-  <span class="sticker s-acid sticker-1">★ NEW: WALKING TACOS</span>
-  <span class="sticker s-hot sticker-2">CHAMOY DRIP ☻</span>
-  <span class="sticker s-orange sticker-3">DOORDASH IN 25 MIN</span>
+  <span class="sticker s-acid sticker-1" data-i18n="hero.sticker.tacos">★ NEW: WALKING TACOS</span>
+  <span class="sticker s-hot sticker-2" data-i18n="hero.sticker.chamoy">CHAMOY DRIP ☻</span>
+  <span class="sticker s-orange sticker-3" data-i18n="hero.sticker.doordash">DOORDASH IN 25 MIN</span>
 </section>
 
 <!-- TICKER -->
@@ -1099,21 +1238,21 @@
   <div class="poster-frame">
     <div class="poster-grid">
       <div class="poster-copy">
-        <div class="poster-eyebrow"><span class="bar"></span><span>THIS MONTH · SPECIAL OFFER</span></div>
+        <div class="poster-eyebrow"><span class="bar"></span><span data-i18n="promo.eyebrow">THIS MONTH · SPECIAL OFFER</span></div>
         <h2 class="poster-name">
-          <span class="poster-line poster-line-top">MOTHER'S</span>
-          <span class="poster-line poster-line-accent">Day</span>
-          <span class="poster-line poster-line-bottom">SPECIAL</span>
+          <span class="poster-line poster-line-top" data-i18n="promo.name.1">MOTHER'S</span>
+          <span class="poster-line poster-line-accent" data-i18n="promo.name.2">Day</span>
+          <span class="poster-line poster-line-bottom" data-i18n="promo.name.3">SPECIAL</span>
         </h2>
-        <p class="poster-deck">Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.</p>
+        <p class="poster-deck" data-i18n="promo.deck">Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.</p>
         <div class="poster-meta">
-          <div><b>FREE</b><span>treat for moms</span></div>
-          <div><b>MANGONADAS</b><span>fruit cups & more</span></div>
-          <div><b>ELOTES</b><span>aguas frescas</span></div>
+          <div><b data-i18n="promo.meta.1b">FREE</b><span data-i18n="promo.meta.1s">treat for moms</span></div>
+          <div><b data-i18n="promo.meta.2b">MANGONADAS</b><span data-i18n="promo.meta.2s">fruit cups & more</span></div>
+          <div><b data-i18n="promo.meta.3b">ELOTES</b><span data-i18n="promo.meta.3s">aguas frescas</span></div>
         </div>
         <div class="hero-ctas" style="margin-top:32px">
-          <a class="btn btn-primary" href="#order">Order now →</a>
-          <a class="btn btn-ghost" href="#menu">See full menu</a>
+          <a class="btn btn-primary" href="#order" data-i18n="promo.cta.order">Order now →</a>
+          <a class="btn btn-ghost" href="#menu" data-i18n="promo.cta.menu">See full menu</a>
         </div>
       </div>
 
@@ -1126,13 +1265,13 @@
             loading="lazy"
             onerror="this.parentElement.style.display='none';document.getElementById('promoFallback').style.display='flex'"
           />
-          <span class="poster-promo-label">THIS MONTH</span>
+          <span class="poster-promo-label" data-i18n="promo.label">THIS MONTH</span>
         </div>
         <div class="poster-placeholder" id="promoFallback" style="display:none">
           <div class="poster-placeholder-icon">🌮🍦</div>
           <div class="poster-placeholder-text">Drop your promo photo here<br/>assets/promo/promo-featured.jpg</div>
         </div>
-        <div class="poster-promo-caption">Share this with the group chat</div>
+        <div class="poster-promo-caption" data-i18n="promo.board.caption">Share this with the group chat</div>
       </div>
     </div>
   </div>
@@ -1151,10 +1290,10 @@
   <div class="wrap" style="margin-bottom:32px">
     <div class="sec-head">
       <div>
-        <div class="sec-no">N°03 / MENU</div>
-        <h2 class="sec-h2">PUNCH<br/>YOUR<br/><span style="color:var(--hot)">CODE.</span></h2>
+        <div class="sec-no" data-i18n="menu.no">N°03 / MENU</div>
+        <h2 class="sec-h2"><span data-i18n="menu.h2.1">PUNCH</span><br/><span data-i18n="menu.h2.2">YOUR</span><br/><span style="color:var(--hot)" data-i18n="menu.h2.3">CODE.</span></h2>
       </div>
-      <p class="sec-deck">Everything on the wall. Punch a code, hit BUY, walk out a happier person. Bestsellers in pink.</p>
+      <p class="sec-deck" data-i18n="menu.deck">Everything on the wall. Punch a code, hit BUY, walk out a happier person. Bestsellers in pink.</p>
     </div>
   </div>
 
@@ -1162,17 +1301,17 @@
     <div class="vend-top">
       <div class="vend-display">
         <span class="led"></span>
-        <span id="vendDisplay">SELECT AN ITEM</span>
+        <span id="vendDisplay" data-i18n="menu.display">SELECT AN ITEM</span>
       </div>
       <div class="vend-tabs-wrap" id="vendTabsWrap">
         <div class="vend-tabs" id="vendTabs">
-          <button class="vend-tab is-on" data-cat="all">ALL</button>
-          <button class="vend-tab" data-cat="sweet">SWEET</button>
-          <button class="vend-tab" data-cat="salty">SALTY</button>
-          <button class="vend-tab" data-cat="drinks">DRINKS</button>
-          <button class="vend-tab" data-cat="paletas">PALETAS</button>
-          <button class="vend-tab" data-cat="nieve">NIEVE</button>
-          <button class="vend-tab" data-cat="icecream">ICE CREAM</button>
+          <button class="vend-tab is-on" data-cat="all" data-i18n="menu.tab.all">ALL</button>
+          <button class="vend-tab" data-cat="sweet" data-i18n="menu.tab.sweet">SWEET</button>
+          <button class="vend-tab" data-cat="salty" data-i18n="menu.tab.salty">SALTY</button>
+          <button class="vend-tab" data-cat="drinks" data-i18n="menu.tab.drinks">DRINKS</button>
+          <button class="vend-tab" data-cat="paletas" data-i18n="menu.tab.paletas">PALETAS</button>
+          <button class="vend-tab" data-cat="nieve" data-i18n="menu.tab.nieve">NIEVE</button>
+          <button class="vend-tab" data-cat="icecream" data-i18n="menu.tab.icecream">ICE CREAM</button>
         </div>
       </div>
     </div>
@@ -1180,8 +1319,8 @@
     <div class="vend-grid" id="vendGrid"></div>
 
     <div class="vend-foot">
-      <span>★ COIN-OP STYLE · WALK-IN OR ORDER ONLINE ★</span>
-      <span>VENDING MACHINE OS v.04</span>
+      <span data-i18n="menu.foot.1">★ COIN-OP STYLE · WALK-IN OR ORDER ONLINE ★</span>
+      <span data-i18n="menu.foot.2">VENDING MACHINE OS v.04</span>
     </div>
   </div>
 </section>
@@ -1223,22 +1362,22 @@
           </defs>
         </svg>
       </div>
-      <div class="wheel-tag t1">spin me!</div>
-      <div class="wheel-tag t2">¿qué se te antoja?</div>
+      <div class="wheel-tag t1" data-i18n="wheel.tag.spin">spin me!</div>
+      <div class="wheel-tag t2" data-i18n="wheel.tag.antoja">¿qué se te antoja?</div>
     </div>
-    <div class="wheel-shake-hint">📱 shake to spin</div>
+    <div class="wheel-shake-hint" data-i18n="wheel.shake">📱 shake to spin</div>
 
     <div class="wheel-side">
-      <div class="wheel-eyebrow"><span class="dot"></span><span>N°04 / WHEEL OF ANTOJOS</span></div>
-      <h2 class="wheel-h2">PICK<br/>FOR <em>ME.</em></h2>
-      <p class="wheel-deck"><strong>Shake your phone</strong> or hit spin — the wheel picks tonight's craving. Filter by vibe first.</p>
+      <div class="wheel-eyebrow"><span class="dot"></span><span data-i18n="wheel.eyebrow">N°04 / WHEEL OF ANTOJOS</span></div>
+      <h2 class="wheel-h2"><span data-i18n="wheel.h2.1">PICK</span><br/><span data-i18n="wheel.h2.2">FOR</span> <em data-i18n="wheel.h2.3">ME.</em></h2>
+      <p class="wheel-deck"><strong data-i18n="wheel.deck.shake">Shake your phone</strong><span data-i18n="wheel.deck.rest"> or hit spin — the wheel picks tonight's craving. Filter by vibe first.</span></p>
 
       <div class="wheel-modes" id="wheelModes">
-        <button class="wheel-mode is-active" data-cat="all">🎯 ALL</button>
-        <button class="wheel-mode" data-cat="fruity">🍓 FRUITY</button>
-        <button class="wheel-mode" data-cat="creamy">🍦 CREAMY</button>
-        <button class="wheel-mode" data-cat="crunchy">🌮 CRUNCHY</button>
-        <button class="wheel-mode" data-cat="icy">🧊 ICY</button>
+        <button class="wheel-mode is-active" data-cat="all" data-i18n="wheel.mode.all">🎯 ALL</button>
+        <button class="wheel-mode" data-cat="fruity" data-i18n="wheel.mode.fruity">🍓 FRUITY</button>
+        <button class="wheel-mode" data-cat="creamy" data-i18n="wheel.mode.creamy">🍦 CREAMY</button>
+        <button class="wheel-mode" data-cat="crunchy" data-i18n="wheel.mode.crunchy">🌮 CRUNCHY</button>
+        <button class="wheel-mode" data-cat="icy" data-i18n="wheel.mode.icy">🧊 ICY</button>
       </div>
 
       <div class="wheel-readout" id="wheelReadout">
@@ -1246,7 +1385,7 @@
         <div class="wheel-readout-inner">
           <div class="ro-swatch" id="roSwatch" style="background:linear-gradient(135deg,#FF1F8F,#FF7A1A)">🍓</div>
           <div class="ro-body">
-            <span class="ro-label">YOUR ANTOJO</span>
+            <span class="ro-label" data-i18n="wheel.ro.label">YOUR ANTOJO</span>
             <div class="ro-name" id="roName">SPIN TO PICK</div>
             <div class="ro-sub" id="roSub">pick a vibe · spin to decide</div>
             <div class="ro-cheer" id="roCheer">¡Eso! 🎉</div>
@@ -1255,8 +1394,8 @@
       </div>
 
       <div class="wheel-cta">
-        <button class="wheel-spin" id="wheelSpin">★ SPIN ★</button>
-        <span class="wheel-hint">show result at the counter</span>
+        <button class="wheel-spin" id="wheelSpin" data-i18n="wheel.spin">★ SPIN ★</button>
+        <span class="wheel-hint" data-i18n="wheel.hint">show result at the counter</span>
       </div>
     </div>
   </div>
@@ -1265,8 +1404,8 @@
 <!-- MANGONADA BUILDER -->
 <section class="builder" id="builder" data-screen-label="05 Mangonada Builder">
   <div class="bld-inner">
-    <div class="bld-eyebrow"><span class="bld-eyebrow-line"></span><span class="bld-eyebrow-text">The Sweet Lab</span></div>
-    <h2 class="bld-hero-h">Build it <em>your way.</em><br/>Print the recipe.<br/>Bring it to the counter.</h2>
+    <div class="bld-eyebrow"><span class="bld-eyebrow-line"></span><span class="bld-eyebrow-text" data-i18n="bld.eyebrow">The Sweet Lab</span></div>
+    <h2 class="bld-hero-h"><span data-i18n="bld.hero.1">Build it </span><em data-i18n="bld.hero.em">your way.</em><br/><span data-i18n="bld.hero.2">Print the recipe.</span><br/><span data-i18n="bld.hero.3">Bring it to the counter.</span></h2>
 
     <!-- STEP 0: item picker — injected by JS -->
     <div id="bldItemPicker"></div>
@@ -1306,10 +1445,10 @@
           </svg>
         </div>
         <div class="bld-legend">
-          <div class="bld-leg-item"><span class="bld-leg-label">BASE</span><span class="bld-leg-val" id="lgBase">—</span></div>
-          <div class="bld-leg-item"><span class="bld-leg-label">FRUIT</span><span class="bld-leg-val" id="lgFruit">—</span></div>
-          <div class="bld-leg-item"><span class="bld-leg-label">SAUCE</span><span class="bld-leg-val" id="lgSauce">—</span></div>
-          <div class="bld-leg-item"><span class="bld-leg-label">TOPPERS</span><span class="bld-leg-val" id="lgTopper">—</span></div>
+          <div class="bld-leg-item"><span class="bld-leg-label" data-i18n="bld.leg.base">BASE</span><span class="bld-leg-val" id="lgBase">—</span></div>
+          <div class="bld-leg-item"><span class="bld-leg-label" data-i18n="bld.leg.fruit">FRUIT</span><span class="bld-leg-val" id="lgFruit">—</span></div>
+          <div class="bld-leg-item"><span class="bld-leg-label" data-i18n="bld.leg.sauce">SAUCE</span><span class="bld-leg-val" id="lgSauce">—</span></div>
+          <div class="bld-leg-item"><span class="bld-leg-label" data-i18n="bld.leg.topper">TOPPERS</span><span class="bld-leg-val" id="lgTopper">—</span></div>
         </div>
       </div>
       <div class="bld-receipt">
@@ -1323,28 +1462,28 @@
         <div class="bld-rcpt-ordernum" id="rcptOrderNo">ORDER #— · BUILD-YOUR-OWN</div>
         <hr class="bld-rcpt-dashed"/>
         <div id="rcptBody">
-          <div class="bld-rcpt-sect">00 · YOUR ITEM</div>
+          <div class="bld-rcpt-sect" data-i18n="bld.rcpt.s0">00 · YOUR ITEM</div>
           <div id="r0"></div>
-          <div class="bld-rcpt-sect">01 · CHOOSE YOUR BASE</div>
+          <div class="bld-rcpt-sect" data-i18n="bld.rcpt.s1">01 · CHOOSE YOUR BASE</div>
           <div id="r1"></div>
-          <div class="bld-rcpt-sect">02 · PILE ON THE FRUIT</div>
+          <div class="bld-rcpt-sect" data-i18n="bld.rcpt.s2">02 · PILE ON THE FRUIT</div>
           <div id="r2"></div>
-          <div class="bld-rcpt-sect">03 · THE CHAMOY MOMENT</div>
+          <div class="bld-rcpt-sect" data-i18n="bld.rcpt.s3">03 · THE CHAMOY MOMENT</div>
           <div id="r3"></div>
-          <div class="bld-rcpt-sect">04 · CROWN IT</div>
+          <div class="bld-rcpt-sect" data-i18n="bld.rcpt.s4">04 · CROWN IT</div>
           <div id="r4"></div>
         </div>
         <hr class="bld-rcpt-dashed"/>
         <div class="bld-rcpt-totals">
-          <div class="bld-rcpt-tot-row"><span>Subtotal</span><span id="rcptSub">$0.00</span></div>
-          <div class="bld-rcpt-tot-row"><span>Tax (7.75%)</span><span id="rcptTax">$0.00</span></div>
-          <div class="bld-rcpt-grand"><span>TOTAL</span><span id="rcptTotal">$0.00</span></div>
+          <div class="bld-rcpt-tot-row"><span data-i18n="bld.rcpt.sub">Subtotal</span><span id="rcptSub">$0.00</span></div>
+          <div class="bld-rcpt-tot-row"><span data-i18n="bld.rcpt.tax">Tax (7.75%)</span><span id="rcptTax">$0.00</span></div>
+          <div class="bld-rcpt-grand"><span data-i18n="bld.rcpt.total">TOTAL</span><span id="rcptTotal">$0.00</span></div>
         </div>
         <div class="bld-rcpt-footer">
-          <div class="bld-rcpt-thanks">¡GRACIAS!</div>
-          <div class="bld-rcpt-show">Show this to the counter</div>
+          <div class="bld-rcpt-thanks" data-i18n="bld.rcpt.thanks">¡GRACIAS!</div>
+          <div class="bld-rcpt-show" data-i18n="bld.rcpt.show">Show this to the counter</div>
           <div class="bld-barcode" id="bldBarcode"></div>
-          <button class="bld-rcpt-print" onclick="window.print()">🖨️ Print this</button>
+          <button class="bld-rcpt-print" onclick="window.print()" data-i18n="bld.rcpt.print">🖨️ Print this</button>
         </div>
       </div>
     </div>
@@ -1355,17 +1494,17 @@
 <section class="story" id="story" data-screen-label="06 Story">
   <div class="story-grid">
     <div>
-      <div class="hero-eyebrow" style="color:var(--hot);margin-bottom:18px"><span class="blink" style="background:var(--hot);box-shadow:0 0 12px var(--hot)"></span><span>OUR STORY · EST. 2023</span></div>
+      <div class="hero-eyebrow" style="color:var(--hot);margin-bottom:18px"><span class="blink" style="background:var(--hot);box-shadow:0 0 12px var(--hot)"></span><span data-i18n="story.eyebrow">OUR STORY · EST. 2023</span></div>
       <h2>
-        <span class="line-1">A LITTLE</span><br/>
-        <span class="line-2">TASTE</span>
-        <span class="line-3"> OF MEXICO,<br/>IN MARSHALL <span class="heart">♥</span></span>
+        <span class="line-1" data-i18n="story.h.1">A LITTLE</span><br/>
+        <span class="line-2" data-i18n="story.h.2">TASTE</span>
+        <span class="line-3"><span data-i18n="story.h.3"> OF MEXICO,</span><br/><span data-i18n="story.h.4">IN MARSHALL </span><span class="heart">♥</span></span>
       </h2>
       <div class="story-q">
-        It's more like an experience. We try to bring a little taste of what Mexico's treats look like — a place where families can gather, kids pick paletas off the wall, and afternoons stretch a little longer.
-        <span>— VANESSA LEON · OWNER · 2023</span>
+        <span class="story-q-text" data-i18n="story.quote">It's more like an experience. We try to bring a little taste of what Mexico's treats look like — a place where families can gather, kids pick paletas off the wall, and afternoons stretch a little longer.</span>
+        <span data-i18n="story.attrib">— VANESSA LEON · OWNER · 2023</span>
       </div>
-      <a href="#visit" class="btn btn-primary">Come say hi →</a>
+      <a href="#visit" class="btn btn-primary" data-i18n="story.cta">Come say hi →</a>
     </div>
 
     <div class="polaroids">
@@ -1392,12 +1531,12 @@
   <div class="wrap" style="margin-bottom:48px">
     <div class="sec-head">
       <div>
-        <div class="sec-no">N°06 / RECEIPTS</div>
-        <h2 class="sec-h2">THE PEOPLE<br/><span style="color:var(--hot)">HAVE</span> SPOKEN.</h2>
+        <div class="sec-no" data-i18n="rev.no">N°06 / RECEIPTS</div>
+        <h2 class="sec-h2"><span data-i18n="rev.h.1">THE PEOPLE</span><br/><span style="color:var(--hot)" data-i18n="rev.h.2">HAVE</span><span data-i18n="rev.h.3"> SPOKEN.</span></h2>
       </div>
       <div style="text-align:right">
         <div style="font-family:'Bowlby One';font-size:64px;color:var(--acid);text-shadow:0 0 24px rgba(199,255,47,.4);line-height:.9">4.8★</div>
-        <div class="mono" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-top:8px">200+ reviews · DoorDash · Google · Facebook</div>
+        <div class="mono" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-top:8px" data-i18n="rev.sub">200+ reviews · DoorDash · Google · Facebook</div>
       </div>
     </div>
   </div>
@@ -1412,38 +1551,38 @@
 <section class="visit" id="visit" data-screen-label="07 Visit">
   <div class="visit-grid">
     <div>
-      <div class="hero-eyebrow"><span class="blink"></span><span>VISIT · ORDER · OPEN LATE</span></div>
+      <div class="hero-eyebrow"><span class="blink"></span><span data-i18n="visit.eyebrow">VISIT · ORDER · OPEN LATE</span></div>
       <h2>
-        <span>COME ON</span>
-        <span>IN.</span>
-        <span>STAY COLD.</span>
+        <span data-i18n="visit.h.1">COME ON</span>
+        <span data-i18n="visit.h.2">IN.</span>
+        <span data-i18n="visit.h.3">STAY COLD.</span>
       </h2>
 
       <div class="info-block" id="order">
         <div class="info-row">
-          <span class="label">Address</span>
+          <span class="label" data-i18n="visit.label.address">Address</span>
           <div class="val">1113 EAST COLLEGE DR<br/>SUITE 3, MARSHALL MN 56258</div>
         </div>
         <div class="info-row">
-          <span class="label">Phone</span>
+          <span class="label" data-i18n="visit.label.phone">Phone</span>
           <div class="val" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
             <a href="tel:5074013162">(507) 401-3162</a>
-            <a href="tel:5074013162" class="call-badge">📞 TAP TO CALL</a>
+            <a href="tel:5074013162" class="call-badge" data-i18n="visit.tapcall">📞 TAP TO CALL</a>
           </div>
         </div>
         <div class="info-row">
-          <span class="label">Order online</span>
+          <span class="label" data-i18n="visit.label.order">Order online</span>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-            <a href="#" class="btn btn-primary">DoorDash →</a>
-            <a href="#" class="btn btn-ghost" style="border-color:var(--bone);color:var(--bone)">Call to order</a>
+            <a href="https://www.doordash.com/store/la-michoacana-elite-marshall-39786257/92719546/" target="_blank" rel="noopener" class="btn btn-primary">DoorDash →</a>
+            <a href="tel:5074013162" class="btn btn-ghost" style="border-color:var(--bone);color:var(--bone)" data-i18n="visit.callorder">Call to order</a>
           </div>
         </div>
         <div class="info-row">
-          <span class="label">Hours</span>
+          <span class="label" data-i18n="visit.label.hours">Hours</span>
           <div style="margin-top:10px">
-            <div class="hours-row"><span class="day">MON — THU</span><span class="time">12PM — 9PM</span></div>
-            <div class="hours-row"><span class="day">FRI — SAT</span><span class="time">12PM — 10PM</span></div>
-            <div class="hours-row"><span class="day">SUNDAY</span><span class="time">1PM — 8PM</span></div>
+            <div class="hours-row"><span class="day" data-i18n="visit.day.monthu">MON — THU</span><span class="time">12PM — 9PM</span></div>
+            <div class="hours-row"><span class="day" data-i18n="visit.day.frisat">FRI — SAT</span><span class="time">12PM — 10PM</span></div>
+            <div class="hours-row"><span class="day" data-i18n="visit.day.sun">SUNDAY</span><span class="time">1PM — 8PM</span></div>
           </div>
         </div>
       </div>
@@ -1464,7 +1603,7 @@
   <div class="brand">
     <img src="assets/logo/logo-removebg.png" alt="La Michoacana Elite" class="footer-logo"/>
   </div>
-  <div class="meta">© 2026 · MARSHALL, MN · MADE WITH <span style="color:var(--hot)">♥</span></div>
+  <div class="meta"><span data-i18n="footer.meta">© 2026 · MARSHALL, MN · MADE WITH </span><span style="color:var(--hot)">♥</span></div>
   <div class="soc">
     <a href="https://www.facebook.com/lamichoacanaelite507/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
     <a href="https://www.instagram.com/lamichoacanaelite507/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
@@ -1473,82 +1612,344 @@
 </footer>
 
 <script>
+// ============================ I18N (EN / ES) ============================
+const I18N = (function(){
+  const STRINGS = {
+    en: {
+      // nav
+      'nav.menu':'Menu', 'nav.month':'This Month', 'nav.lab':'Lab',
+      'nav.story':'Story', 'nav.visit':'Visit', 'nav.order':'Order →',
+      // hero
+      'hero.eyebrow':'Marshall, MN · 12pm — Close',
+      'hero.status.checking':'CHECKING...',
+      'hero.sub':'Real-fruit paletas, hand-scooped ice cream, mangonadas worth driving for. The shop your group chat keeps screenshot-ing.',
+      'hero.cta.menu':'See the menu →',
+      'hero.cta.build':'Build a mangonada',
+      'hero.stat.flavors':'flavors on rotation',
+      'hero.stat.reviews':'doordash · 200+ reviews',
+      'hero.stat.inhouse':'made in-house · made fresh',
+      'hero.sticker.tacos':'★ NEW: WALKING TACOS',
+      'hero.sticker.chamoy':'CHAMOY DRIP ☻',
+      'hero.sticker.doordash':'DOORDASH IN 25 MIN',
+      // promo / this month (static fallback copy)
+      'promo.eyebrow':'THIS MONTH · SPECIAL OFFER',
+      'promo.pill':'This Month',
+      'promo.cta.order':'Order now →',
+      'promo.cta.menu':'See full menu',
+      'promo.caption':'Share this with the group chat',
+      'promo.name.1':'MOTHER’S', 'promo.name.2':'Day', 'promo.name.3':'SPECIAL',
+      'promo.deck':'Celebrate the sweetest woman in your life with something sweet from La Michoacana Elite! Free treat for mothers — while supplies last.',
+      'promo.meta.1b':'FREE', 'promo.meta.1s':'treat for moms',
+      'promo.meta.2b':'MANGONADAS', 'promo.meta.2s':'fruit cups & more',
+      'promo.meta.3b':'ELOTES', 'promo.meta.3s':'aguas frescas',
+      'promo.label':'THIS MONTH', 'promo.board.caption':'Share this with the group chat',
+      // menu section
+      'menu.no':'N°03 / MENU',
+      'menu.h2.1':'PUNCH', 'menu.h2.2':'YOUR', 'menu.h2.3':'CODE.',
+      'menu.deck':'Everything on the wall. Punch a code, hit BUY, walk out a happier person. Bestsellers in pink.',
+      'menu.display':'SELECT AN ITEM',
+      'menu.tab.all':'ALL', 'menu.tab.sweet':'SWEET', 'menu.tab.salty':'SALTY',
+      'menu.tab.drinks':'DRINKS', 'menu.tab.paletas':'PALETAS', 'menu.tab.nieve':'NIEVE',
+      'menu.tab.icecream':'ICE CREAM',
+      'menu.foot.1':'★ COIN-OP STYLE · WALK-IN OR ORDER ONLINE ★',
+      'menu.foot.2':'VENDING MACHINE OS v.04',
+      'menu.buy':'BUY ►', 'menu.added':'✓ ADDED',
+      // wheel
+      'wheel.tag.spin':'spin me!',
+      'wheel.tag.antoja':'¿qué se te antoja?',
+      'wheel.shake':'📱 shake to spin',
+      'wheel.eyebrow':'N°04 / WHEEL OF ANTOJOS',
+      'wheel.h2.1':'PICK', 'wheel.h2.2':'FOR', 'wheel.h2.3':'ME.',
+      'wheel.deck.shake':'Shake your phone',
+      'wheel.deck.rest':' or hit spin — the wheel picks tonight’s craving. Filter by vibe first.',
+      'wheel.mode.all':'🎯 ALL', 'wheel.mode.fruity':'🍓 FRUITY', 'wheel.mode.creamy':'🍦 CREAMY',
+      'wheel.mode.crunchy':'🌮 CRUNCHY', 'wheel.mode.icy':'🧊 ICY',
+      'wheel.ro.label':'YOUR ANTOJO',
+      'wheel.ro.name':'SPIN TO PICK',
+      'wheel.ro.sub':'pick a vibe · spin to decide',
+      'wheel.spin':'★ SPIN ★', 'wheel.spin.again':'★ SPIN AGAIN ★', 'wheel.spinning':'⏳ SPINNING...',
+      'wheel.hint':'show result at the counter',
+      'wheel.opts':'options',
+      'wheel.cat.all':'all vibes', 'wheel.cat.fruity':'fruity picks', 'wheel.cat.creamy':'creamy picks',
+      'wheel.cat.crunchy':'crunchy picks', 'wheel.cat.icy':'icy picks',
+      // builder
+      'bld.eyebrow':'The Sweet Lab',
+      'bld.hero.1':'Build it ', 'bld.hero.em':'your way.', 'bld.hero.2':'Print the recipe.', 'bld.hero.3':'Bring it to the counter.',
+      'bld.leg.base':'BASE', 'bld.leg.fruit':'FRUIT', 'bld.leg.sauce':'SAUCE', 'bld.leg.topper':'TOPPERS',
+      'bld.rcpt.order':'ORDER #— · BUILD-YOUR-OWN',
+      'bld.rcpt.s0':'00 · YOUR ITEM', 'bld.rcpt.s1':'01 · CHOOSE YOUR BASE',
+      'bld.rcpt.s2':'02 · PILE ON THE FRUIT', 'bld.rcpt.s3':'03 · THE CHAMOY MOMENT', 'bld.rcpt.s4':'04 · CROWN IT',
+      'bld.rcpt.sub':'Subtotal', 'bld.rcpt.tax':'Tax (7.75%)', 'bld.rcpt.total':'TOTAL',
+      'bld.rcpt.thanks':'¡GRACIAS!', 'bld.rcpt.show':'Show this to the counter', 'bld.rcpt.print':'🖨️ Print this',
+      'bld.step0':'Step 0 — What are you building?',
+      'bld.incl':'incl.', 'bld.back':'← Back', 'bld.next':'Next →', 'bld.done':'Done ✓',
+      'bld.ordno':'ORDER #', 'bld.byo':' · BUILD-YOUR-OWN',
+      // story
+      'story.eyebrow':'OUR STORY · EST. 2023',
+      'story.h.1':'A LITTLE', 'story.h.2':'TASTE', 'story.h.3':' OF MEXICO,', 'story.h.4':'IN MARSHALL ',
+      'story.quote':'It’s more like an experience. We try to bring a little taste of what Mexico’s treats look like — a place where families can gather, kids pick paletas off the wall, and afternoons stretch a little longer.',
+      'story.attrib':'— VANESSA LEON · OWNER · 2023',
+      'story.cta':'Come say hi →',
+      'story.cap.1':'inside the shop', 'story.cap.2':'the photo corner', 'story.cap.3':'the wings wall',
+      // reviews
+      'rev.no':'N°06 / RECEIPTS',
+      'rev.h.1':'THE PEOPLE', 'rev.h.2':'HAVE', 'rev.h.3':' SPOKEN.',
+      'rev.sub':'200+ reviews · DoorDash · Google · Facebook',
+      // visit
+      'visit.eyebrow':'VISIT · ORDER · OPEN LATE',
+      'visit.h.1':'COME ON', 'visit.h.2':'IN.', 'visit.h.3':'STAY COLD.',
+      'visit.label.address':'Address', 'visit.label.phone':'Phone',
+      'visit.label.order':'Order online', 'visit.label.hours':'Hours',
+      'visit.tapcall':'📞 TAP TO CALL',
+      'visit.callorder':'Call to order',
+      'visit.day.monthu':'MON — THU', 'visit.day.frisat':'FRI — SAT', 'visit.day.sun':'SUNDAY',
+      // footer
+      'footer.meta':'© 2026 · MARSHALL, MN · MADE WITH ',
+      // status badge
+      'status.open':'OPEN NOW', 'status.closed':'CLOSED · opens ',
+      // cart
+      'cart.fab':'Cart',
+      'cart.title':'Your Cart',
+      'cart.empty':'Your cart is empty. Add something tasty!',
+      'cart.item':'item', 'cart.items':'items',
+      'cart.subtotal':'Subtotal',
+      'cart.checkout':'Checkout →',
+      'cart.clear':'Clear cart',
+      'cart.close':'Close',
+      'cart.added':'Added to cart',
+      'cart.remove':'Remove',
+      'cart.qty.dec':'Decrease quantity', 'cart.qty.inc':'Increase quantity',
+      'cart.confirm.title':'¡Order saved! 🎉',
+      'cart.confirm.msg':'Taking you to DoorDash to finish your order…',
+      'cart.confirm.note':'Direct checkout is coming soon.',
+    },
+    es: {
+      // nav
+      'nav.menu':'Menú', 'nav.month':'Este Mes', 'nav.lab':'Laboratorio',
+      'nav.story':'Historia', 'nav.visit':'Visítanos', 'nav.order':'Ordenar →',
+      // hero
+      'hero.eyebrow':'Marshall, MN · 12pm — Cierre',
+      'hero.status.checking':'VERIFICANDO...',
+      'hero.sub':'Paletas de fruta natural, helado servido a mano y mangonadas que valen el viaje. La heladería que tu chat de grupo no deja de capturar.',
+      'hero.cta.menu':'Ver el menú →',
+      'hero.cta.build':'Arma una mangonada',
+      'hero.stat.flavors':'sabores en rotación',
+      'hero.stat.reviews':'doordash · 200+ reseñas',
+      'hero.stat.inhouse':'hecho en casa · hecho fresco',
+      'hero.sticker.tacos':'★ NUEVO: WALKING TACOS',
+      'hero.sticker.chamoy':'CHORRITO DE CHAMOY ☻',
+      'hero.sticker.doordash':'DOORDASH EN 25 MIN',
+      // promo
+      'promo.eyebrow':'ESTE MES · OFERTA ESPECIAL',
+      'promo.pill':'Este Mes',
+      'promo.cta.order':'Ordenar ahora →',
+      'promo.cta.menu':'Ver menú completo',
+      'promo.caption':'Comparte esto con el chat del grupo',
+      'promo.name.1':'ESPECIAL', 'promo.name.2':'del', 'promo.name.3':'DÍA DE LAS MADRES',
+      'promo.deck':'¡Celebra a la mujer más dulce de tu vida con algo rico de La Michoacana Elite! Antojo gratis para las mamás — hasta agotar existencias.',
+      'promo.meta.1b':'GRATIS', 'promo.meta.1s':'antojo para mamás',
+      'promo.meta.2b':'MANGONADAS', 'promo.meta.2s':'vasos de fruta y más',
+      'promo.meta.3b':'ELOTES', 'promo.meta.3s':'aguas frescas',
+      'promo.label':'ESTE MES', 'promo.board.caption':'Comparte esto con el chat del grupo',
+      // menu section
+      'menu.no':'N°03 / MENÚ',
+      'menu.h2.1':'MARCA', 'menu.h2.2':'TU', 'menu.h2.3':'CÓDIGO.',
+      'menu.deck':'Todo lo que hay en la pared. Marca un código, dale a COMPRAR y sal más feliz. Los favoritos en rosa.',
+      'menu.display':'SELECCIONA UN ANTOJO',
+      'menu.tab.all':'TODO', 'menu.tab.sweet':'DULCE', 'menu.tab.salty':'SALADO',
+      'menu.tab.drinks':'BEBIDAS', 'menu.tab.paletas':'PALETAS', 'menu.tab.nieve':'NIEVE',
+      'menu.tab.icecream':'HELADO',
+      'menu.foot.1':'★ ESTILO MÁQUINA · PARA LLEVAR O EN LÍNEA ★',
+      'menu.foot.2':'MÁQUINA EXPENDEDORA OS v.04',
+      'menu.buy':'COMPRAR ►', 'menu.added':'✓ AGREGADO',
+      // wheel
+      'wheel.tag.spin':'¡gírame!',
+      'wheel.tag.antoja':'¿qué se te antoja?',
+      'wheel.shake':'📱 agita para girar',
+      'wheel.eyebrow':'N°04 / RULETA DE ANTOJOS',
+      'wheel.h2.1':'ELIGE', 'wheel.h2.2':'POR', 'wheel.h2.3':'MÍ.',
+      'wheel.deck.shake':'Agita tu teléfono',
+      'wheel.deck.rest':' o dale a girar — la ruleta elige el antojo de hoy. Filtra por estilo primero.',
+      'wheel.mode.all':'🎯 TODO', 'wheel.mode.fruity':'🍓 FRUTAL', 'wheel.mode.creamy':'🍦 CREMOSO',
+      'wheel.mode.crunchy':'🌮 CRUJIENTE', 'wheel.mode.icy':'🧊 HELADO',
+      'wheel.ro.label':'TU ANTOJO',
+      'wheel.ro.name':'GIRA PARA ELEGIR',
+      'wheel.ro.sub':'elige un estilo · gira para decidir',
+      'wheel.spin':'★ GIRAR ★', 'wheel.spin.again':'★ GIRAR OTRA VEZ ★', 'wheel.spinning':'⏳ GIRANDO...',
+      'wheel.hint':'muestra el resultado en el mostrador',
+      'wheel.opts':'opciones',
+      'wheel.cat.all':'todos los estilos', 'wheel.cat.fruity':'antojos frutales', 'wheel.cat.creamy':'antojos cremosos',
+      'wheel.cat.crunchy':'antojos crujientes', 'wheel.cat.icy':'antojos helados',
+      // builder
+      'bld.eyebrow':'El Laboratorio Dulce',
+      'bld.hero.1':'Ármala ', 'bld.hero.em':'a tu manera.', 'bld.hero.2':'Imprime la receta.', 'bld.hero.3':'Llévala al mostrador.',
+      'bld.leg.base':'BASE', 'bld.leg.fruit':'FRUTA', 'bld.leg.sauce':'SALSA', 'bld.leg.topper':'EXTRAS',
+      'bld.rcpt.order':'ORDEN #— · HECHA A TU GUSTO',
+      'bld.rcpt.s0':'00 · TU ANTOJO', 'bld.rcpt.s1':'01 · ELIGE TU BASE',
+      'bld.rcpt.s2':'02 · LLÉNALA DE FRUTA', 'bld.rcpt.s3':'03 · EL MOMENTO DEL CHAMOY', 'bld.rcpt.s4':'04 · CORÓNALA',
+      'bld.rcpt.sub':'Subtotal', 'bld.rcpt.tax':'Impuesto (7.75%)', 'bld.rcpt.total':'TOTAL',
+      'bld.rcpt.thanks':'¡GRACIAS!', 'bld.rcpt.show':'Muestra esto en el mostrador', 'bld.rcpt.print':'🖨️ Imprimir',
+      'bld.step0':'Paso 0 — ¿Qué vas a armar?',
+      'bld.incl':'incl.', 'bld.back':'← Atrás', 'bld.next':'Siguiente →', 'bld.done':'Listo ✓',
+      'bld.ordno':'ORDEN #', 'bld.byo':' · HECHA A TU GUSTO',
+      // story
+      'story.eyebrow':'NUESTRA HISTORIA · DESDE 2023',
+      'story.h.1':'UN POQUITO', 'story.h.2':'SABOR', 'story.h.3':' DE MÉXICO,', 'story.h.4':'EN MARSHALL ',
+      'story.quote':'Es más como una experiencia. Tratamos de traer un poquito de cómo se ven los antojitos de México — un lugar donde las familias se reúnen, los niños escogen paletas de la pared y las tardes se alargan un poco más.',
+      'story.attrib':'— VANESSA LEON · DUEÑA · 2023',
+      'story.cta':'Ven a saludar →',
+      'story.cap.1':'dentro de la tienda', 'story.cap.2':'el rincón de fotos', 'story.cap.3':'la pared de alas',
+      // reviews
+      'rev.no':'N°06 / RESEÑAS',
+      'rev.h.1':'LA GENTE', 'rev.h.2':'YA', 'rev.h.3':' HABLÓ.',
+      'rev.sub':'200+ reseñas · DoorDash · Google · Facebook',
+      // visit
+      'visit.eyebrow':'VISÍTANOS · ORDENA · ABIERTO HASTA TARDE',
+      'visit.h.1':'PÁSALE.', 'visit.h.2':'ADENTRO.', 'visit.h.3':'QUÉDATE FRESCO.',
+      'visit.label.address':'Dirección', 'visit.label.phone':'Teléfono',
+      'visit.label.order':'Ordenar en línea', 'visit.label.hours':'Horario',
+      'visit.tapcall':'📞 TOCA PARA LLAMAR',
+      'visit.callorder':'Llama para ordenar',
+      'visit.day.monthu':'LUN — JUE', 'visit.day.frisat':'VIE — SÁB', 'visit.day.sun':'DOMINGO',
+      // footer
+      'footer.meta':'© 2026 · MARSHALL, MN · HECHO CON ',
+      // status badge
+      'status.open':'ABIERTO AHORA', 'status.closed':'CERRADO · abre ',
+      // cart
+      'cart.fab':'Carrito',
+      'cart.title':'Tu Carrito',
+      'cart.empty':'Tu carrito está vacío. ¡Agrega algo rico!',
+      'cart.item':'artículo', 'cart.items':'artículos',
+      'cart.subtotal':'Subtotal',
+      'cart.checkout':'Pagar →',
+      'cart.clear':'Vaciar carrito',
+      'cart.close':'Cerrar',
+      'cart.added':'Agregado al carrito',
+      'cart.remove':'Quitar',
+      'cart.qty.dec':'Disminuir cantidad', 'cart.qty.inc':'Aumentar cantidad',
+      'cart.confirm.title':'¡Orden guardada! 🎉',
+      'cart.confirm.msg':'Te llevamos a DoorDash para completar tu orden…',
+      'cart.confirm.note':'El pago directo estará disponible pronto.',
+    },
+  };
+  let lang = (function(){ try { return localStorage.getItem('lme_lang') || 'en'; } catch(e){ return 'en'; } })();
+  if (lang !== 'es') lang = 'en';
+  const subs = [];
+  function t(key){
+    return (STRINGS[lang] && STRINGS[lang][key] != null) ? STRINGS[lang][key]
+         : (STRINGS.en[key] != null ? STRINGS.en[key] : key);
+  }
+  function applyStatic(){
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  }
+  function setLang(next){
+    lang = (next === 'es') ? 'es' : 'en';
+    try { localStorage.setItem('lme_lang', lang); } catch(e){}
+    document.documentElement.lang = lang;
+    applyStatic();
+    subs.forEach(fn => { try { fn(lang); } catch(e){} });
+    updateToggle();
+  }
+  function onChange(fn){ subs.push(fn); }
+  function updateToggle(){
+    document.querySelectorAll('.lang-toggle button').forEach(b => {
+      b.classList.toggle('is-on', b.dataset.lang === lang);
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+  }
+  // wire toggle + initial paint once DOM is ready
+  function init(){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-toggle button').forEach(b => {
+      b.addEventListener('click', () => setLang(b.dataset.lang));
+    });
+    applyStatic();
+    updateToggle();
+    // run subscribers once so JS-rendered content matches a persisted ES choice
+    if (lang !== 'en') subs.forEach(fn => { try { fn(lang); } catch(e){} });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  return { get lang(){ return lang; }, t, setLang, onChange };
+})();
+
 // ============================ DATA ============================
 const MENU = [
   /* ── SWEET ──────────────────────────────────────────────────────── */
-  { code:"C1", cat:"sweet",   name:"MANGONADA",                  price:7.49, desc:"Mango sorbet, chamoy, tajín, tamarindo straw.", best:true,  c1:"#FF7A1A", c2:"#FF1F8F", img:"assets/images/MANGONADA.png" },
-  { code:"C2", cat:"sweet",   name:"Sandía Loca",                price:6.50, desc:"Watermelon, chili-lime salt, gummies.", best:false, c1:"#FF8B9E", c2:"#FF6BB0", img:"assets/images/Sandía Loca RASPADOS.png" },
-  { code:"C3", cat:"sweet",   name:"Piña Colada",                price:6.00, desc:"Pineapple ice with coconut drizzle.", best:false, c1:"#FFE08A", c2:"#FFEFCB", img:"assets/images/Piña Colada RASPADOS.png" },
-  { code:"S1", cat:"sweet",   name:"Fresas con Crema",           price:7.99, desc:"Fresh sliced strawberries covered with sweet cream topped with choice topping.", best:true,  c1:"#FF1F8F", c2:"#FF6BB0", img:"assets/images/Fresa con Crema.png" },
-  { code:"S2", cat:"sweet",   name:"Fresas con Cheesecake y Crema", price:8.99, desc:"Fresh sliced strawberries and cheesecake bites covered with sweet cream and topped with toppings.", best:true,  c1:"#FF2E93", c2:"#FFC2D4", img:"assets/images/Fresas con Cheesecake y Crema.png" },
-  { code:"S3", cat:"sweet",   name:"Fresas con Crema Congeladas",price:6.99, desc:"Frozen strawberries covered with sweet cream topped with topping.", best:false, c1:"#FF6BB0", c2:"#FFD6E7", img:"assets/images/Fresas con Crema Congeladas.png" },
-  { code:"S4", cat:"sweet",   name:"Banana Split",               price:10.99,desc:"Banana with 3 scoops of ice cream topped with whipped cream, chocolate syrup, and caramel.", best:false, c1:"#F4D58D", c2:"#FFE08A", img:"assets/images/Banana Split.png" },
-  { code:"S5", cat:"sweet",   name:"Bionico",                    price:9.99, desc:"Chopped mixed fruits covered with sweet cream topped with granola, coconut flakes, raisins and whipped cream.", best:false, c1:"#7DD957", c2:"#FF6BB0", img:"assets/images/Bionico.png" },
-  { code:"S6", cat:"sweet",   name:"Churros with Ice Cream",     price:12.99,desc:"Churros with ice cream topped with whipped cream and drizzled with chocolate syrup.", best:false, c1:"#D2691E", c2:"#FFB627", img:"assets/images/Churros with Ice Cream.png" },
-  { code:"S7", cat:"sweet",   name:"Fruit Cup",                  price:8.99, desc:"Fruits served in a cup sprinkled with Tajín, Chamoy and lime juice.", best:false, c1:"#FF7A1A", c2:"#7DD957", img:"assets/images/Fruit Cup.png" },
-  { code:"D4", cat:"sweet",   name:"Mini Pancakes",              price:12.99,desc:"Fresh mini pancakes drizzled with Nutella and sweet cream, served with fresh bananas, sliced strawberries and ice cream.", best:false, c1:"#F4D58D", c2:"#E8C383", img:"assets/images/mini pancakes.png" },
+  { code:"C1", cat:"sweet",   name:"MANGONADA",                  price:7.49, desc:"Mango sorbet, chamoy, tajín, tamarindo straw.", name_es:"MANGONADA", desc_es:"Nieve de mango, chamoy, tajín y popote de tamarindo.", best:true,  c1:"#FF7A1A", c2:"#FF1F8F", img:"assets/images/MANGONADA.png" },
+  { code:"C2", cat:"sweet",   name:"Sandía Loca",                price:6.50, desc:"Watermelon, chili-lime salt, gummies.", name_es:"Sandía Loca", desc_es:"Sandía, sal de chile y limón, y gomitas.", best:false, c1:"#FF8B9E", c2:"#FF6BB0", img:"assets/images/Sandía Loca RASPADOS.png" },
+  { code:"C3", cat:"sweet",   name:"Piña Colada",                price:6.00, desc:"Pineapple ice with coconut drizzle.", name_es:"Piña Colada", desc_es:"Raspado de piña con chorrito de coco.", best:false, c1:"#FFE08A", c2:"#FFEFCB", img:"assets/images/Piña Colada RASPADOS.png" },
+  { code:"S1", cat:"sweet",   name:"Fresas con Crema",           price:7.99, desc:"Fresh sliced strawberries covered with sweet cream topped with choice topping.", name_es:"Fresas con Crema", desc_es:"Fresas frescas rebanadas con crema dulce y el topping de tu elección.", best:true,  c1:"#FF1F8F", c2:"#FF6BB0", img:"assets/images/Fresa con Crema.png" },
+  { code:"S2", cat:"sweet",   name:"Fresas con Cheesecake y Crema", price:8.99, desc:"Fresh sliced strawberries and cheesecake bites covered with sweet cream and topped with toppings.", name_es:"Fresas con Cheesecake y Crema", desc_es:"Fresas frescas rebanadas y trozos de cheesecake con crema dulce y toppings.", best:true,  c1:"#FF2E93", c2:"#FFC2D4", img:"assets/images/Fresas con Cheesecake y Crema.png" },
+  { code:"S3", cat:"sweet",   name:"Fresas con Crema Congeladas",price:6.99, desc:"Frozen strawberries covered with sweet cream topped with topping.", name_es:"Fresas con Crema Congeladas", desc_es:"Fresas congeladas con crema dulce y topping.", best:false, c1:"#FF6BB0", c2:"#FFD6E7", img:"assets/images/Fresas con Crema Congeladas.png" },
+  { code:"S4", cat:"sweet",   name:"Banana Split",               price:10.99,desc:"Banana with 3 scoops of ice cream topped with whipped cream, chocolate syrup, and caramel.", name_es:"Banana Split", desc_es:"Plátano con 3 bolas de helado, crema batida, jarabe de chocolate y caramelo.", best:false, c1:"#F4D58D", c2:"#FFE08A", img:"assets/images/Banana Split.png" },
+  { code:"S5", cat:"sweet",   name:"Bionico",                    price:9.99, desc:"Chopped mixed fruits covered with sweet cream topped with granola, coconut flakes, raisins and whipped cream.", name_es:"Bionico", desc_es:"Frutas picadas con crema dulce, granola, coco rallado, pasas y crema batida.", best:false, c1:"#7DD957", c2:"#FF6BB0", img:"assets/images/Bionico.png" },
+  { code:"S6", cat:"sweet",   name:"Churros with Ice Cream",     price:12.99,desc:"Churros with ice cream topped with whipped cream and drizzled with chocolate syrup.", name_es:"Churros con Helado", desc_es:"Churros con helado, crema batida y chorrito de jarabe de chocolate.", best:false, c1:"#D2691E", c2:"#FFB627", img:"assets/images/Churros with Ice Cream.png" },
+  { code:"S7", cat:"sweet",   name:"Fruit Cup",                  price:8.99, desc:"Fruits served in a cup sprinkled with Tajín, Chamoy and lime juice.", name_es:"Vaso de Fruta", desc_es:"Frutas en vaso con Tajín, chamoy y jugo de limón.", best:false, c1:"#FF7A1A", c2:"#7DD957", img:"assets/images/Fruit Cup.png" },
+  { code:"D4", cat:"sweet",   name:"Mini Pancakes",              price:12.99,desc:"Fresh mini pancakes drizzled with Nutella and sweet cream, served with fresh bananas, sliced strawberries and ice cream.", name_es:"Mini Pancakes", desc_es:"Mini pancakes con Nutella y crema dulce, plátano fresco, fresas rebanadas y helado.", best:false, c1:"#F4D58D", c2:"#E8C383", img:"assets/images/mini pancakes.png" },
 
   /* ── SALTY ──────────────────────────────────────────────────────── */
-  { code:"D1", cat:"salty",   name:"Elote Chorreado",            price:11.99,desc:"Cup of corn served with chips, topped with mayo, cotija cheese, lime juice, butter, hot sauce, nacho cheese, and jalapeños.", best:true,  c1:"#FFE08A", c2:"#FFB627", img:"assets/images/Elote.png" },
-  { code:"D2", cat:"salty",   name:"Walking Taco",               price:11.99,desc:"Ground beef, cheddar cheese, lettuce, tomatoes, sour cream, and olives served in a Nacho Cheese Doritos bag.", best:true,  c1:"#FF8B3D", c2:"#FFB627", img:"assets/images/Walking Tacos.png" },
-  { code:"D3", cat:"salty",   name:"Quesabirria 3pc",            price:11.00,desc:"Slow-braised beef, cheese, consomé.", best:true,  c1:"#E61E4D", c2:"#FF6B3D", img:"assets/images/Quesabirria 3pc.png" },
-  { code:"D5", cat:"salty",   name:"Nachos Locos",               price:9.00, desc:"Chips, queso, jalapeños, beef, sour cream.", best:false, c1:"#FFB627", c2:"#FF8B3D", img:"assets/images/Nachos Locos.png" },
-  { code:"T1", cat:"salty",   name:"Esquites",                   price:6.99, desc:"Corn served in a cup, topped with mayo, butter, cotija cheese and hot sauce.", best:false, c1:"#FFE08A", c2:"#F4D58D", img:"assets/images/Esquites.png" },
-  { code:"T2", cat:"salty",   name:"Sopa Chorreada",             price:12.99,desc:"Instant cup noodles with chips, corn, nacho cheese, cotija cheese, sour cream, hot sauce, and crushed flaming hot chips.", best:false, c1:"#FF4500", c2:"#FF8B3D", img:"assets/images/Sopa Chorreada.png" },
-  { code:"T3", cat:"salty",   name:"Chicharron Preparado",       price:9.99, desc:"Fried wheat crisps topped with cabbage, tomatoes, avocado, sour cream, cotija cheese, pork rinds, and hot sauce.", best:false, c1:"#D2691E", c2:"#FFB627", img:"assets/images/Chicharron Preparado.png" },
-  { code:"T4", cat:"salty",   name:"Tostilocos",                 price:11.99,desc:"Chips topped with jicama, cucumbers, shredded carrots, pork rinds, peanuts, lime, Tajín, chamoy, tamarind candies and hot sauce.", best:true,  c1:"#FF8B3D", c2:"#D7263D", img:"assets/images/Tostilocos.png" },
-  { code:"T5", cat:"salty",   name:"Cueritos Locos",             price:8.99, desc:"Pork rinds in a cup with cucumbers, peanuts, drizzled with hot sauce and lime juice.", best:false, c1:"#FF6B3D", c2:"#FF8B3D", img:"assets/images/Cueritos Locos.png" },
-  { code:"T6", cat:"salty",   name:"Papas Locas",                price:8.99, desc:"Chips with fruits, peanuts, gummies, tamarind candies, drizzled with chamoy, hot sauce, Tajín and lime juice.", best:false, c1:"#FF7A1A", c2:"#FFB627", img:"assets/images/Papas Locas.png" },
-  { code:"T7", cat:"salty",   name:"Pepinos Locos",              price:7.99, desc:"Fresh cucumbers stuffed with peanuts, tamarind candies, chamoy, Tajín and hot sauce.", best:false, c1:"#7DD957", c2:"#C7FF2F", img:"assets/images/Pepinos Locos.png" },
-  { code:"T8", cat:"salty",   name:"Chips with Nacho Cheese",    price:8.99, desc:"Chips covered with nacho cheese.", best:false, c1:"#FFB627", c2:"#FF8B3D", img:"assets/images/Chips with Nacho Cheese.png" },
-  { code:"T9", cat:"salty",   name:"Torta",                      price:13.99,desc:"Soft bread with choice of meat, avocado, mayo, refried beans, lettuce, tomato, cheese and jalapeños. Served with fries.", best:false, c1:"#D2691E", c2:"#8B4513", img:"assets/images/Torta.png" },
+  { code:"D1", cat:"salty",   name:"Elote Chorreado",            price:11.99,desc:"Cup of corn served with chips, topped with mayo, cotija cheese, lime juice, butter, hot sauce, nacho cheese, and jalapeños.", name_es:"Elote Chorreado", desc_es:"Vaso de elote con totopos, mayonesa, queso cotija, limón, mantequilla, salsa picante, queso nacho y jalapeños.", best:true,  c1:"#FFE08A", c2:"#FFB627", img:"assets/images/Elote.png" },
+  { code:"D2", cat:"salty",   name:"Walking Taco",               price:11.99,desc:"Ground beef, cheddar cheese, lettuce, tomatoes, sour cream, and olives served in a Nacho Cheese Doritos bag.", name_es:"Walking Taco", desc_es:"Carne molida, queso cheddar, lechuga, tomate, crema agria y aceitunas en bolsa de Doritos Nacho Cheese.", best:true,  c1:"#FF8B3D", c2:"#FFB627", img:"assets/images/Walking Tacos.png" },
+  { code:"D3", cat:"salty",   name:"Quesabirria 3pc",            price:11.00,desc:"Slow-braised beef, cheese, consomé.", name_es:"Quesabirria 3pz", desc_es:"Res cocida a fuego lento, queso y consomé.", best:true,  c1:"#E61E4D", c2:"#FF6B3D", img:"assets/images/Quesabirria 3pc.png" },
+  { code:"D5", cat:"salty",   name:"Nachos Locos",               price:9.00, desc:"Chips, queso, jalapeños, beef, sour cream.", name_es:"Nachos Locos", desc_es:"Totopos, queso, jalapeños, carne y crema agria.", best:false, c1:"#FFB627", c2:"#FF8B3D", img:"assets/images/Nachos Locos.png" },
+  { code:"T1", cat:"salty",   name:"Esquites",                   price:6.99, desc:"Corn served in a cup, topped with mayo, butter, cotija cheese and hot sauce.", name_es:"Esquites", desc_es:"Elote desgranado en vaso con mayonesa, mantequilla, queso cotija y salsa picante.", best:false, c1:"#FFE08A", c2:"#F4D58D", img:"assets/images/Esquites.png" },
+  { code:"T2", cat:"salty",   name:"Sopa Chorreada",             price:12.99,desc:"Instant cup noodles with chips, corn, nacho cheese, cotija cheese, sour cream, hot sauce, and crushed flaming hot chips.", name_es:"Sopa Chorreada", desc_es:"Sopa instantánea con totopos, elote, queso nacho, queso cotija, crema agria, salsa picante y chips flamin' hot triturados.", best:false, c1:"#FF4500", c2:"#FF8B3D", img:"assets/images/Sopa Chorreada.png" },
+  { code:"T3", cat:"salty",   name:"Chicharron Preparado",       price:9.99, desc:"Fried wheat crisps topped with cabbage, tomatoes, avocado, sour cream, cotija cheese, pork rinds, and hot sauce.", name_es:"Chicharrón Preparado", desc_es:"Chicharrón de harina con repollo, tomate, aguacate, crema agria, queso cotija, chicharrón de cerdo y salsa picante.", best:false, c1:"#D2691E", c2:"#FFB627", img:"assets/images/Chicharron Preparado.png" },
+  { code:"T4", cat:"salty",   name:"Tostilocos",                 price:11.99,desc:"Chips topped with jicama, cucumbers, shredded carrots, pork rinds, peanuts, lime, Tajín, chamoy, tamarind candies and hot sauce.", name_es:"Tostilocos", desc_es:"Totopos con jícama, pepino, zanahoria rallada, chicharrón, cacahuates, limón, Tajín, chamoy, dulces de tamarindo y salsa picante.", best:true,  c1:"#FF8B3D", c2:"#D7263D", img:"assets/images/Tostilocos.png" },
+  { code:"T5", cat:"salty",   name:"Cueritos Locos",             price:8.99, desc:"Pork rinds in a cup with cucumbers, peanuts, drizzled with hot sauce and lime juice.", name_es:"Cueritos Locos", desc_es:"Cueritos en vaso con pepino, cacahuates, salsa picante y jugo de limón.", best:false, c1:"#FF6B3D", c2:"#FF8B3D", img:"assets/images/Cueritos Locos.png" },
+  { code:"T6", cat:"salty",   name:"Papas Locas",                price:8.99, desc:"Chips with fruits, peanuts, gummies, tamarind candies, drizzled with chamoy, hot sauce, Tajín and lime juice.", name_es:"Papas Locas", desc_es:"Papas con frutas, cacahuates, gomitas, dulces de tamarindo, chamoy, salsa picante, Tajín y jugo de limón.", best:false, c1:"#FF7A1A", c2:"#FFB627", img:"assets/images/Papas Locas.png" },
+  { code:"T7", cat:"salty",   name:"Pepinos Locos",              price:7.99, desc:"Fresh cucumbers stuffed with peanuts, tamarind candies, chamoy, Tajín and hot sauce.", name_es:"Pepinos Locos", desc_es:"Pepinos frescos rellenos de cacahuates, dulces de tamarindo, chamoy, Tajín y salsa picante.", best:false, c1:"#7DD957", c2:"#C7FF2F", img:"assets/images/Pepinos Locos.png" },
+  { code:"T8", cat:"salty",   name:"Chips with Nacho Cheese",    price:8.99, desc:"Chips covered with nacho cheese.", name_es:"Totopos con Queso Nacho", desc_es:"Totopos cubiertos con queso nacho.", best:false, c1:"#FFB627", c2:"#FF8B3D", img:"assets/images/Chips with Nacho Cheese.png" },
+  { code:"T9", cat:"salty",   name:"Torta",                      price:13.99,desc:"Soft bread with choice of meat, avocado, mayo, refried beans, lettuce, tomato, cheese and jalapeños. Served with fries.", name_es:"Torta", desc_es:"Pan suave con carne a elegir, aguacate, mayonesa, frijoles refritos, lechuga, tomate, queso y jalapeños. Con papas a la francesa.", best:false, c1:"#D2691E", c2:"#8B4513", img:"assets/images/Torta.png" },
 
   /* ── DRINKS ─────────────────────────────────────────────────────── */
-  { code:"E1", cat:"drinks",  name:"Horchata",                   price:4.99, desc:"Cinnamon-rice milk, served extra cold.", best:false, c1:"#FFF6E5", c2:"#F4D58D", img:"assets/images/Horchata.png" },
-  { code:"E2", cat:"drinks",  name:"Agua Jamaica",               price:4.50, desc:"Hibiscus brew, lightly sweetened.", best:false, c1:"#E61E4D", c2:"#A01B30", img:"assets/images/Agua Jamaica.png" },
-  { code:"E3", cat:"drinks",  name:"Strawberry Shake",           price:6.50, desc:"Fresh strawberries, milk, ice cream.", best:true,  c1:"#FF1F8F", c2:"#FF6BB0", img:"assets/images/Strawberry Shake.png" },
-  { code:"E4", cat:"drinks",  name:"Tamarindo",                  price:4.50, desc:"Tart-sweet cooler with chili rim.", best:false, c1:"#A0522D", c2:"#7A4F2E", img:"assets/images/Tamarindo.png" },
-  { code:"D6", cat:"drinks",  name:"Diablito",                   price:7.99, desc:"Tamarind drink with fresh tamarind sorbet, served in a rimmed glass with chamoy, tajín and lime juice.", best:true,  c1:"#D7263D", c2:"#A01B30", img:"assets/images/Diablito.png" },
-  { code:"D7", cat:"drinks",  name:"Rusa",                       price:7.99, desc:"Refreshing tangy drink with Squirt soda, chamoy, tajín, lime juice and a selection of fruits.", best:false, c1:"#7DD957", c2:"#FFE08A", img:"assets/images/Rusa.png" },
-  { code:"D8", cat:"drinks",  name:"Topo Chico",                 price:7.99, desc:"Mineral water in a rimmed glass with chamoy, tajín, lime juice and selection of fruits.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Topo Chico.png" },
-  { code:"D9", cat:"drinks",  name:"Shake",                      price:6.99, desc:"Smooth and creamy blend of milk and ice cream. Choose from any flavor.", best:false, c1:"#F4D58D", c2:"#FFEFCB", img:"assets/images/Shake.png" },
-  { code:"D10",cat:"drinks",  name:"Creamy Strawberry",          price:4.99, desc:"Creamy strawberry drink.", best:false, c1:"#FF6BB0", c2:"#FF1F8F", img:"assets/images/Creamy Strawberry.png" },
-  { code:"D11",cat:"drinks",  name:"Low Cal Juice",              price:7.99, desc:"Carrot, orange, green apple, pineapple.", best:false, c1:"#FF7A1A", c2:"#7DD957", img:"assets/images/Low Cal Juice.png" },
-  { code:"D12",cat:"drinks",  name:"Energetic Juice",            price:7.99, desc:"Green apple, orange, pineapple.", best:false, c1:"#7DD957", c2:"#FFE08A", img:"assets/images/Energetic Juice.png" },
-  { code:"D13",cat:"drinks",  name:"Vampire Juice",              price:7.99, desc:"Beet, carrot, orange, celery.", best:false, c1:"#8B1A2A", c2:"#E61E4D", img:"assets/images/Vampire Juice.png" },
-  { code:"D14",cat:"drinks",  name:"Green Juice",                price:7.99, desc:"Cucumber, green apple, pineapple and celery.", best:false, c1:"#7DD957", c2:"#C7FF2F", img:"assets/images/Green Juice.png" },
+  { code:"E1", cat:"drinks",  name:"Horchata",                   price:4.99, desc:"Cinnamon-rice milk, served extra cold.", name_es:"Horchata", desc_es:"Bebida de arroz con canela, bien fría.", best:false, c1:"#FFF6E5", c2:"#F4D58D", img:"assets/images/Horchata.png" },
+  { code:"E2", cat:"drinks",  name:"Agua Jamaica",               price:4.50, desc:"Hibiscus brew, lightly sweetened.", name_es:"Agua de Jamaica", desc_es:"Agua de flor de jamaica, ligeramente endulzada.", best:false, c1:"#E61E4D", c2:"#A01B30", img:"assets/images/Agua Jamaica.png" },
+  { code:"E3", cat:"drinks",  name:"Strawberry Shake",           price:6.50, desc:"Fresh strawberries, milk, ice cream.", name_es:"Malteada de Fresa", desc_es:"Fresas frescas, leche y helado.", best:true,  c1:"#FF1F8F", c2:"#FF6BB0", img:"assets/images/Strawberry Shake.png" },
+  { code:"E4", cat:"drinks",  name:"Tamarindo",                  price:4.50, desc:"Tart-sweet cooler with chili rim.", name_es:"Tamarindo", desc_es:"Bebida agridulce con escarchado de chile.", best:false, c1:"#A0522D", c2:"#7A4F2E", img:"assets/images/Tamarindo.png" },
+  { code:"D6", cat:"drinks",  name:"Diablito",                   price:7.99, desc:"Tamarind drink with fresh tamarind sorbet, served in a rimmed glass with chamoy, tajín and lime juice.", name_es:"Diablito", desc_es:"Bebida de tamarindo con nieve de tamarindo, en vaso escarchado con chamoy, tajín y jugo de limón.", best:true,  c1:"#D7263D", c2:"#A01B30", img:"assets/images/Diablito.png" },
+  { code:"D7", cat:"drinks",  name:"Rusa",                       price:7.99, desc:"Refreshing tangy drink with Squirt soda, chamoy, tajín, lime juice and a selection of fruits.", name_es:"Rusa", desc_es:"Bebida refrescante con refresco Squirt, chamoy, tajín, jugo de limón y frutas.", best:false, c1:"#7DD957", c2:"#FFE08A", img:"assets/images/Rusa.png" },
+  { code:"D8", cat:"drinks",  name:"Topo Chico",                 price:7.99, desc:"Mineral water in a rimmed glass with chamoy, tajín, lime juice and selection of fruits.", name_es:"Topo Chico", desc_es:"Agua mineral en vaso escarchado con chamoy, tajín, jugo de limón y frutas.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Topo Chico.png" },
+  { code:"D9", cat:"drinks",  name:"Shake",                      price:6.99, desc:"Smooth and creamy blend of milk and ice cream. Choose from any flavor.", name_es:"Malteada", desc_es:"Mezcla suave y cremosa de leche y helado. Elige cualquier sabor.", best:false, c1:"#F4D58D", c2:"#FFEFCB", img:"assets/images/Shake.png" },
+  { code:"D10",cat:"drinks",  name:"Creamy Strawberry",          price:4.99, desc:"Creamy strawberry drink.", name_es:"Fresa Cremosa", desc_es:"Bebida cremosa de fresa.", best:false, c1:"#FF6BB0", c2:"#FF1F8F", img:"assets/images/Creamy Strawberry.png" },
+  { code:"D11",cat:"drinks",  name:"Low Cal Juice",              price:7.99, desc:"Carrot, orange, green apple, pineapple.", name_es:"Jugo Bajo en Calorías", desc_es:"Zanahoria, naranja, manzana verde y piña.", best:false, c1:"#FF7A1A", c2:"#7DD957", img:"assets/images/Low Cal Juice.png" },
+  { code:"D12",cat:"drinks",  name:"Energetic Juice",            price:7.99, desc:"Green apple, orange, pineapple.", name_es:"Jugo Energético", desc_es:"Manzana verde, naranja y piña.", best:false, c1:"#7DD957", c2:"#FFE08A", img:"assets/images/Energetic Juice.png" },
+  { code:"D13",cat:"drinks",  name:"Vampire Juice",              price:7.99, desc:"Beet, carrot, orange, celery.", name_es:"Jugo Vampiro", desc_es:"Betabel, zanahoria, naranja y apio.", best:false, c1:"#8B1A2A", c2:"#E61E4D", img:"assets/images/Vampire Juice.png" },
+  { code:"D14",cat:"drinks",  name:"Green Juice",                price:7.99, desc:"Cucumber, green apple, pineapple and celery.", name_es:"Jugo Verde", desc_es:"Pepino, manzana verde, piña y apio.", best:false, c1:"#7DD957", c2:"#C7FF2F", img:"assets/images/Green Juice.png" },
 
   /* ── PALETAS ─────────────────────────────────────────────────────── */
-  { code:"A2", cat:"paletas", name:"Mango Chamoy",               price:4.50, desc:"Real mango, chamoy ribbon, chili rim.", best:true,  c1:"#FF7A1A", c2:"#FFD24A", img:"assets/images/Mango Chamoy.png" },
-  { code:"A3", cat:"paletas", name:"Pepino Limón",               price:4.50, desc:"Cucumber, lime, sea salt. Cooling.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Pepino Limón.png" },
-  { code:"P4", cat:"paletas", name:"Prune",                      price:3.75, desc:"Handcrafted prune paleta with natural fruit flavors.", best:false, c1:"#6B2D5A", c2:"#9B4D7A", img:"assets/images/Prune.png" },
-  { code:"P5", cat:"paletas", name:"Coffee Paleta",              price:3.75, desc:"Rich coffee-flavored ice bar.", best:false, c1:"#5C3A21", c2:"#8B6347", img:"assets/images/Coffee Paleta.png" },
-  { code:"P6", cat:"paletas", name:"Eggnog",                     price:3.75, desc:"Milk-based paleta with cinnamon and nutmeg.", best:false, c1:"#FFF6E5", c2:"#F4D58D", img:"assets/images/Eggnog.png" },
-  { code:"P7", cat:"paletas", name:"Bubblegum",                  price:3.75, desc:"Sweet bubblegum-flavored paleta.", best:false, c1:"#FF6BB0", c2:"#FFB3D9", img:"assets/images/Bubblegum.png" },
-  { code:"P8", cat:"paletas", name:"Esquimal",                   price:4.29, desc:"Ice cream bar covered with hard chocolate. Specify flavor and topping (granola, pecan, sprinkles, coconut, peanuts).", best:false, c1:"#3D2009", c2:"#7A4F2E", img:"assets/images/Esquimal.png" },
-  { code:"P9", cat:"paletas", name:"Lime Paleta",                price:3.75, desc:"Handcrafted lime paleta — refreshing citrus.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Lime Paleta.png" },
-  { code:"P10",cat:"paletas", name:"Lime with Chili",            price:3.75, desc:"Lime paleta infused with chili.", best:false, c1:"#7DD957", c2:"#D7263D", img:"assets/images/Lime with Chili.png" },
+  { code:"A2", cat:"paletas", name:"Mango Chamoy",               price:4.50, desc:"Real mango, chamoy ribbon, chili rim.", name_es:"Mango Chamoy", desc_es:"Mango natural, chamoy y escarchado de chile.", best:true,  c1:"#FF7A1A", c2:"#FFD24A", img:"assets/images/Mango Chamoy.png" },
+  { code:"A3", cat:"paletas", name:"Pepino Limón",               price:4.50, desc:"Cucumber, lime, sea salt. Cooling.", name_es:"Pepino Limón", desc_es:"Pepino, limón y sal de mar. Refrescante.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Pepino Limón.png" },
+  { code:"P4", cat:"paletas", name:"Prune",                      price:3.75, desc:"Handcrafted prune paleta with natural fruit flavors.", name_es:"Ciruela", desc_es:"Paleta artesanal de ciruela con sabor a fruta natural.", best:false, c1:"#6B2D5A", c2:"#9B4D7A", img:"assets/images/Prune.png" },
+  { code:"P5", cat:"paletas", name:"Coffee Paleta",              price:3.75, desc:"Rich coffee-flavored ice bar.", name_es:"Paleta de Café", desc_es:"Paleta con intenso sabor a café.", best:false, c1:"#5C3A21", c2:"#8B6347", img:"assets/images/Coffee Paleta.png" },
+  { code:"P6", cat:"paletas", name:"Eggnog",                     price:3.75, desc:"Milk-based paleta with cinnamon and nutmeg.", name_es:"Rompope", desc_es:"Paleta a base de leche con canela y nuez moscada.", best:false, c1:"#FFF6E5", c2:"#F4D58D", img:"assets/images/Eggnog.png" },
+  { code:"P7", cat:"paletas", name:"Bubblegum",                  price:3.75, desc:"Sweet bubblegum-flavored paleta.", name_es:"Chicle", desc_es:"Paleta dulce con sabor a chicle.", best:false, c1:"#FF6BB0", c2:"#FFB3D9", img:"assets/images/Bubblegum.png" },
+  { code:"P8", cat:"paletas", name:"Esquimal",                   price:4.29, desc:"Ice cream bar covered with hard chocolate. Specify flavor and topping (granola, pecan, sprinkles, coconut, peanuts).", name_es:"Esquimal", desc_es:"Paleta de helado cubierta con chocolate. Elige sabor y topping (granola, nuez, chispas, coco, cacahuate).", best:false, c1:"#3D2009", c2:"#7A4F2E", img:"assets/images/Esquimal.png" },
+  { code:"P9", cat:"paletas", name:"Lime Paleta",                price:3.75, desc:"Handcrafted lime paleta — refreshing citrus.", name_es:"Paleta de Limón", desc_es:"Paleta artesanal de limón — cítrica y refrescante.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Lime Paleta.png" },
+  { code:"P10",cat:"paletas", name:"Lime with Chili",            price:3.75, desc:"Lime paleta infused with chili.", name_es:"Limón con Chile", desc_es:"Paleta de limón con chile.", best:false, c1:"#7DD957", c2:"#D7263D", img:"assets/images/Lime with Chili.png" },
 
   /* ── NIEVE (Dairy Free) ──────────────────────────────────────────── */
-  { code:"N1", cat:"nieve",   name:"Chamango",                   price:3.50, desc:"Dairy-free mango sorbet.", best:false, c1:"#FF7A1A", c2:"#FFD24A", img:"assets/images/Chamango.png" },
-  { code:"N2", cat:"nieve",   name:"Cucumber with Chili",        price:3.50, desc:"Dairy-free cucumber sorbet with chili.", best:false, c1:"#7DD957", c2:"#D7263D", img:"assets/images/Cucumber with Chili.png" },
-  { code:"N3", cat:"nieve",   name:"Pineapple with Chili",       price:3.50, desc:"Dairy-free pineapple sorbet with chili.", best:false, c1:"#FFE08A", c2:"#FF7A1A", img:"assets/images/Pineapple with Chili.png" },
-  { code:"N4", cat:"nieve",   name:"Tamarind Nieve",             price:3.50, desc:"Dairy-free tamarind sorbet.", best:false, c1:"#A0522D", c2:"#7A4F2E", img:"assets/images/Tamarind Nieve.png" },
-  { code:"N5", cat:"nieve",   name:"Watermelon Nieve",           price:3.50, desc:"Dairy-free watermelon sorbet.", best:false, c1:"#FF6B7A", c2:"#FF8B9E", img:"assets/images/Watermelon Nieve.png" },
-  { code:"N6", cat:"nieve",   name:"Lime Nieve",                 price:3.50, desc:"Dairy-free lime sorbet.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Lime Nieve.png" },
+  { code:"N1", cat:"nieve",   name:"Chamango",                   price:3.50, desc:"Dairy-free mango sorbet.", name_es:"Chamango", desc_es:"Nieve de mango sin lácteos.", best:false, c1:"#FF7A1A", c2:"#FFD24A", img:"assets/images/Chamango.png" },
+  { code:"N2", cat:"nieve",   name:"Cucumber with Chili",        price:3.50, desc:"Dairy-free cucumber sorbet with chili.", name_es:"Pepino con Chile", desc_es:"Nieve de pepino con chile, sin lácteos.", best:false, c1:"#7DD957", c2:"#D7263D", img:"assets/images/Cucumber with Chili.png" },
+  { code:"N3", cat:"nieve",   name:"Pineapple with Chili",       price:3.50, desc:"Dairy-free pineapple sorbet with chili.", name_es:"Piña con Chile", desc_es:"Nieve de piña con chile, sin lácteos.", best:false, c1:"#FFE08A", c2:"#FF7A1A", img:"assets/images/Pineapple with Chili.png" },
+  { code:"N4", cat:"nieve",   name:"Tamarind Nieve",             price:3.50, desc:"Dairy-free tamarind sorbet.", name_es:"Nieve de Tamarindo", desc_es:"Nieve de tamarindo sin lácteos.", best:false, c1:"#A0522D", c2:"#7A4F2E", img:"assets/images/Tamarind Nieve.png" },
+  { code:"N5", cat:"nieve",   name:"Watermelon Nieve",           price:3.50, desc:"Dairy-free watermelon sorbet.", name_es:"Nieve de Sandía", desc_es:"Nieve de sandía sin lácteos.", best:false, c1:"#FF6B7A", c2:"#FF8B9E", img:"assets/images/Watermelon Nieve.png" },
+  { code:"N6", cat:"nieve",   name:"Lime Nieve",                 price:3.50, desc:"Dairy-free lime sorbet.", name_es:"Nieve de Limón", desc_es:"Nieve de limón sin lácteos.", best:false, c1:"#C7FF2F", c2:"#7DD957", img:"assets/images/Lime Nieve.png" },
 
   /* ── ICE CREAM ───────────────────────────────────────────────────── */
-  { code:"B1", cat:"icecream",name:"Vanilla Cone",               price:5.00, desc:"Hand-scooped vanilla on waffle cone.", best:false, c1:"#FFEFCB", c2:"#FFD89A", img:"assets/images/Vanilla Cone.jpg" },
-  { code:"B2", cat:"icecream",name:"Tres Leches",                price:5.50, desc:"Cinnamon sponge folded into milk ice cream.", best:true,  c1:"#F4D58D", c2:"#E8C383", img:"assets/images/Tres Leches.jpg" },
-  { code:"B3", cat:"icecream",name:"Choco Abuelita",             price:5.00, desc:"Mexican chocolate, cinnamon, clove.", best:false, c1:"#5C3A21", c2:"#7A4F2E", img:"assets/images/Choco Abuelita.png" },
-  { code:"IC1",cat:"icecream",name:"Gansito",                    price:3.99, desc:"Gansito-flavored ice cream. Cup or cone — small, medium, or large.", best:false, c1:"#E61E4D", c2:"#FF6BB0", img:"assets/images/Gansito.png" },
-  { code:"IC2",cat:"icecream",name:"Chocolate Abuelita",         price:3.99, desc:"Classic Mexican chocolate ice cream. Cup or cone.", best:false, c1:"#5C3A21", c2:"#3D2009", img:"assets/images/Chocolate Abuelita.png" },
-  { code:"IC3",cat:"icecream",name:"Oreo",                       price:3.99, desc:"Oreo ice cream. Cup or cone — small, medium, or large.", best:false, c1:"#2A2A2A", c2:"#6B6B6B", img:"assets/images/Oreo.png" },
-  { code:"IC4",cat:"icecream",name:"Mazapan",                    price:3.99, desc:"Creamy peanut-flavored ice cream. Cup or cone.", best:false, c1:"#D2B48C", c2:"#F4D58D", img:"assets/images/Mazapan.png" },
-  { code:"IC5",cat:"icecream",name:"Coffee Ice Cream",           price:3.99, desc:"Rich coffee ice cream. Cup or cone.", best:false, c1:"#6F4E37", c2:"#A0522D", img:"assets/images/Coffee Ice Cream.png" },
-  { code:"IC6",cat:"icecream",name:"Mamey",                      price:3.99, desc:"Creamy tropical mamey-flavored ice cream. Cup or cone.", best:false, c1:"#E8713C", c2:"#FF8B3D", img:"assets/images/Mamey.png" },
-  { code:"IC7",cat:"icecream",name:"Vanilla Ice Cream",          price:3.99, desc:"Classic vanilla. Cup or cone — small, medium, or large.", best:false, c1:"#FFEFCB", c2:"#FFF6E5", img:"assets/images/Vanilla Ice Cream.png" },
-  { code:"IC8",cat:"icecream",name:"Nut",                        price:3.99, desc:"Creamy nut-flavored ice cream. Cup or cone.", best:false, c1:"#8B6347", c2:"#D2B48C", img:"assets/images/Nut.png" },
+  { code:"B1", cat:"icecream",name:"Vanilla Cone",               price:5.00, desc:"Hand-scooped vanilla on waffle cone.", name_es:"Cono de Vainilla", desc_es:"Vainilla servida a mano en cono de waffle.", best:false, c1:"#FFEFCB", c2:"#FFD89A", img:"assets/images/Vanilla Cone.jpg" },
+  { code:"B2", cat:"icecream",name:"Tres Leches",                price:5.50, desc:"Cinnamon sponge folded into milk ice cream.", name_es:"Tres Leches", desc_es:"Bizcocho con canela mezclado en helado de leche.", best:true,  c1:"#F4D58D", c2:"#E8C383", img:"assets/images/Tres Leches.jpg" },
+  { code:"B3", cat:"icecream",name:"Choco Abuelita",             price:5.00, desc:"Mexican chocolate, cinnamon, clove.", name_es:"Choco Abuelita", desc_es:"Chocolate mexicano, canela y clavo.", best:false, c1:"#5C3A21", c2:"#7A4F2E", img:"assets/images/Choco Abuelita.png" },
+  { code:"IC1",cat:"icecream",name:"Gansito",                    price:3.99, desc:"Gansito-flavored ice cream. Cup or cone — small, medium, or large.", name_es:"Gansito", desc_es:"Helado sabor Gansito. Vaso o cono — chico, mediano o grande.", best:false, c1:"#E61E4D", c2:"#FF6BB0", img:"assets/images/Gansito.png" },
+  { code:"IC2",cat:"icecream",name:"Chocolate Abuelita",         price:3.99, desc:"Classic Mexican chocolate ice cream. Cup or cone.", name_es:"Chocolate Abuelita", desc_es:"Helado clásico de chocolate mexicano. Vaso o cono.", best:false, c1:"#5C3A21", c2:"#3D2009", img:"assets/images/Chocolate Abuelita.png" },
+  { code:"IC3",cat:"icecream",name:"Oreo",                       price:3.99, desc:"Oreo ice cream. Cup or cone — small, medium, or large.", name_es:"Oreo", desc_es:"Helado de Oreo. Vaso o cono — chico, mediano o grande.", best:false, c1:"#2A2A2A", c2:"#6B6B6B", img:"assets/images/Oreo.png" },
+  { code:"IC4",cat:"icecream",name:"Mazapan",                    price:3.99, desc:"Creamy peanut-flavored ice cream. Cup or cone.", name_es:"Mazapán", desc_es:"Helado cremoso sabor cacahuate. Vaso o cono.", best:false, c1:"#D2B48C", c2:"#F4D58D", img:"assets/images/Mazapan.png" },
+  { code:"IC5",cat:"icecream",name:"Coffee Ice Cream",           price:3.99, desc:"Rich coffee ice cream. Cup or cone.", name_es:"Helado de Café", desc_es:"Helado intenso de café. Vaso o cono.", best:false, c1:"#6F4E37", c2:"#A0522D", img:"assets/images/Coffee Ice Cream.png" },
+  { code:"IC6",cat:"icecream",name:"Mamey",                      price:3.99, desc:"Creamy tropical mamey-flavored ice cream. Cup or cone.", name_es:"Mamey", desc_es:"Helado cremoso tropical sabor mamey. Vaso o cono.", best:false, c1:"#E8713C", c2:"#FF8B3D", img:"assets/images/Mamey.png" },
+  { code:"IC7",cat:"icecream",name:"Vanilla Ice Cream",          price:3.99, desc:"Classic vanilla. Cup or cone — small, medium, or large.", name_es:"Helado de Vainilla", desc_es:"Vainilla clásica. Vaso o cono — chico, mediano o grande.", best:false, c1:"#FFEFCB", c2:"#FFF6E5", img:"assets/images/Vanilla Ice Cream.png" },
+  { code:"IC8",cat:"icecream",name:"Nut",                        price:3.99, desc:"Creamy nut-flavored ice cream. Cup or cone.", name_es:"Nuez", desc_es:"Helado cremoso sabor nuez. Vaso o cono.", best:false, c1:"#8B6347", c2:"#D2B48C", img:"assets/images/Nut.png" },
 ];
 
 const REVIEWS = [
@@ -1652,21 +2053,24 @@ const REVIEWS = [
   const display = document.getElementById('vendDisplay');
   let cat = 'all';
 
+  const nameOf = m => (I18N.lang === 'es' && m.name_es) ? m.name_es : m.name;
+  const descOf = m => (I18N.lang === 'es' && m.desc_es) ? m.desc_es : m.desc;
+
   function render(){
     const items = cat === 'all' ? MENU : MENU.filter(m => m.cat === cat);
     grid.innerHTML = items.map(m => `
-      <article class="slot ${m.best?'is-best':''}" data-code="${m.code}" data-name="${m.name}" data-price="${m.price.toFixed(2)}">
+      <article class="slot ${m.best?'is-best':''}" data-code="${m.code}" data-name="${nameOf(m)}" data-price="${m.price.toFixed(2)}">
         <div class="slot-img" style="--c1:${m.c1};--c2:${m.c2}">
           <span class="slot-code">${m.code}</span>
           ${m.best ? '<span class="slot-tag">★ HOT</span>' : ''}
-          ${m.img ? `<img src="${m.img}" alt="${m.name}" loading="lazy" onerror="this.style.display='none'"/>` : ''}
-          <div class="slot-img-emoji">${m.img ? '' : shapeFor(m.cat)}</div>
+          ${m.img ? `<img src="${m.img}" alt="${nameOf(m)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>` : ''}
+          <div class="slot-img-emoji" ${m.img ? 'style="display:none"' : ''}>${shapeFor(m.cat)}</div>
         </div>
-        <h3 class="slot-name">${m.name}</h3>
-        <p class="slot-desc">${m.desc}</p>
+        <h3 class="slot-name">${nameOf(m)}</h3>
+        <p class="slot-desc">${descOf(m)}</p>
         <div class="slot-foot">
           <span class="slot-price">$${m.price.toFixed(2)}</span>
-          <button class="slot-buy">BUY ►</button>
+          <button class="slot-buy">${I18N.t('menu.buy')}</button>
         </div>
       </article>
     `).join('');
@@ -1678,12 +2082,16 @@ const REVIEWS = [
       const buyBtn = el.querySelector('.slot-buy');
       buyBtn.addEventListener('click', e => {
         e.stopPropagation();
-        display.textContent = `★ ${el.dataset.name.toUpperCase()} ADDED · $${el.dataset.price} ★`;
-        buyBtn.textContent = '✓ ADDED';
-        setTimeout(() => { buyBtn.textContent = 'BUY ►'; }, 1400);
+        const code = el.dataset.code;
+        const item = MENU.find(m => m.code === code);
+        if (item) window.Cart.add({ code:item.code, price:item.price, img:item.img, emoji:shapeFor(item.cat) });
+        display.textContent = `★ ${el.dataset.name.toUpperCase()} · ${I18N.t('cart.added').toUpperCase()} ★`;
+        buyBtn.textContent = I18N.t('menu.added');
+        setTimeout(() => { buyBtn.textContent = I18N.t('menu.buy'); }, 1400);
       });
     });
   }
+  I18N.onChange(render);
 
   function shapeFor(cat){
     if (cat === 'paletas')  return '◊';
@@ -1712,20 +2120,181 @@ const REVIEWS = [
   window.addEventListener('resize', updateTabFade);
 })();
 
+// ============================ SHOPPING CART ============================
+// Reusable cart store. Lines are {code, price, qty, img, emoji}. Display names
+// are resolved from MENU at render time so the cart stays bilingual. The
+// checkout handler is a placeholder that redirects to DoorDash; Phase 2 (Clover)
+// can swap Cart.checkoutHandler for a real in-site checkout without touching the UI.
+const Cart = (function(){
+  const KEY = 'lme_cart';
+  let lines = (function(){
+    try { const v = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(v) ? v : []; }
+    catch(e){ return []; }
+  })();
+  const subs = [];
+  function persist(){ try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch(e){} }
+  function emit(){ persist(); subs.forEach(fn => { try { fn(api); } catch(e){} }); }
+  function find(code){ return lines.find(l => l.code === code); }
+
+  const api = {
+    onChange(fn){ subs.push(fn); return api; },
+    get items(){ return lines.map(l => Object.assign({}, l)); },
+    get count(){ return lines.reduce((n,l) => n + l.qty, 0); },
+    get total(){ return lines.reduce((s,l) => s + l.price * l.qty, 0); },
+    add(item, qty){
+      qty = qty || 1;
+      const ex = find(item.code);
+      if (ex) ex.qty += qty;
+      else lines.push({ code:item.code, price:item.price, qty:qty, img:item.img || null, emoji:item.emoji || '🛒' });
+      emit();
+    },
+    setQty(code, qty){
+      const l = find(code);
+      if (!l) return;
+      if (qty <= 0) lines = lines.filter(x => x.code !== code);
+      else l.qty = qty;
+      emit();
+    },
+    increment(code){ const l = find(code); api.setQty(code, l ? l.qty + 1 : 1); },
+    decrement(code){ const l = find(code); if (l) api.setQty(code, l.qty - 1); },
+    remove(code){ lines = lines.filter(l => l.code !== code); emit(); },
+    clear(){ lines = []; emit(); },
+    // Placeholder until Phase 2 — overridable for Clover checkout later.
+    checkoutHandler: null,
+  };
+  return api;
+})();
+window.Cart = Cart;
+
+// ---- Cart UI controller ----
+(function(){
+  const DOORDASH_URL = 'https://www.doordash.com/store/la-michoacana-elite-marshall-39786257/92719546/';
+  const fab       = document.getElementById('cartFab');
+  const fabTotal  = document.getElementById('cartFabTotal');
+  const fabCount  = document.getElementById('cartFabCount');
+  const overlay   = document.getElementById('cartOverlay');
+  const drawer    = document.getElementById('cartDrawer');
+  const closeBtn  = document.getElementById('cartClose');
+  const body      = document.getElementById('cartBody');
+  const hdCount   = document.getElementById('cartHdCount');
+  const subtotal  = document.getElementById('cartSubtotal');
+  const checkout  = document.getElementById('cartCheckout');
+  const clearBtn  = document.getElementById('cartClear');
+  const confirm   = document.getElementById('cartConfirm');
+  if (!fab || !drawer) return;
+
+  const money = n => '$' + n.toFixed(2);
+  const nameOf = code => {
+    const m = MENU.find(x => x.code === code);
+    if (!m) return code;
+    return (I18N.lang === 'es' && m.name_es) ? m.name_es : m.name;
+  };
+
+  function renderLines(){
+    const items = Cart.items;
+    if (!items.length){
+      body.innerHTML = `<div class="cart-empty">${I18N.t('cart.empty')}</div>`;
+      return;
+    }
+    body.innerHTML = items.map(l => `
+      <div class="cart-line" data-code="${l.code}">
+        <span class="cart-line-sw">${l.img ? `<img src="${l.img}" alt="" loading="lazy" onerror="this.replaceWith(document.createTextNode('${l.emoji||'🛒'}'))"/>` : (l.emoji||'🛒')}</span>
+        <span class="cart-line-info">
+          <span class="cart-line-name">${nameOf(l.code)}</span>
+          <span class="cart-line-unit">${money(l.price)} ${I18N.t('cart.item')}</span>
+        </span>
+        <span class="cart-qty">
+          <button type="button" data-act="dec" aria-label="${I18N.t('cart.qty.dec')}">−</button>
+          <span class="cart-qty-n">${l.qty}</span>
+          <button type="button" data-act="inc" aria-label="${I18N.t('cart.qty.inc')}">+</button>
+        </span>
+        <span class="cart-line-tot">${money(l.price * l.qty)}</span>
+      </div>
+    `).join('');
+  }
+
+  function renderTotals(){
+    const count = Cart.count, total = Cart.total;
+    fabTotal.textContent = money(total);
+    fabCount.textContent = count;
+    subtotal.textContent = money(total);
+    const unit = count === 1 ? I18N.t('cart.item') : I18N.t('cart.items');
+    hdCount.textContent = count ? (count + ' ' + unit) : '';
+    fab.classList.toggle('visible', count > 0);
+    checkout.disabled = count === 0;
+    clearBtn.style.display = count ? '' : 'none';
+  }
+
+  function renderAll(){ renderLines(); renderTotals(); }
+
+  // bump animation when count grows
+  let prevCount = Cart.count;
+  Cart.onChange(() => {
+    const c = Cart.count;
+    renderAll();
+    if (c > prevCount){ fab.classList.remove('bump'); void fab.offsetWidth; fab.classList.add('bump'); }
+    prevCount = c;
+  });
+  I18N.onChange(renderAll); // re-translate cart contents on language switch
+
+  // open / close
+  let lastFocus = null;
+  function openCart(){
+    lastFocus = document.activeElement;
+    overlay.classList.add('open'); drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden','false'); fab.setAttribute('aria-expanded','true');
+    closeBtn.focus();
+  }
+  function closeCart(){
+    overlay.classList.remove('open'); drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true'); fab.setAttribute('aria-expanded','false');
+    confirm.classList.remove('show');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  fab.addEventListener('click', openCart);
+  closeBtn.addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('open')) closeCart(); });
+
+  // qty steppers (delegated)
+  body.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    const code = btn.closest('.cart-line').dataset.code;
+    if (btn.dataset.act === 'inc') Cart.increment(code);
+    else Cart.decrement(code);
+  });
+
+  clearBtn.addEventListener('click', () => Cart.clear());
+
+  // Checkout: show confirmation, then redirect to DoorDash (placeholder for Phase 2 / Clover)
+  function doCheckout(){
+    if (Cart.count === 0) return;
+    if (typeof Cart.checkoutHandler === 'function'){ Cart.checkoutHandler(Cart); return; }
+    confirm.classList.add('show');
+    const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    setTimeout(() => { window.location.href = DOORDASH_URL; }, reduce ? 600 : 1600);
+  }
+  checkout.addEventListener('click', doCheckout);
+
+  renderAll();
+})();
+
 // ============================ WHEEL OF ANTOJOS ============================
 (function(){
   const ALL_ITEMS = [
-    {name:"MANGO CHAMOY",   sub:"paleta · sun-ripe mango",      icon:"🥭", c1:"#FF7A1A", c2:"#FFD24A", cat:"fruity",  cheer:"¡Eso! 🎉"},
-    {name:"FRESA C/ CREMA", sub:"paleta · strawberry & cream",  icon:"🍓", c1:"#FF1F8F", c2:"#FF9EC8", cat:"creamy",  cheer:"¡Qué rico! 🍓"},
-    {name:"MANGONADA",      sub:"raspado · spicy-sweet loaded",  icon:"🌶️", c1:"#FF7A1A", c2:"#E8336F", cat:"icy",     cheer:"¡Ándale! 🌶️"},
-    {name:"WALKING TACO",   sub:"snack · crunchy midnight fuel", icon:"🌮", c1:"#7CB94A", c2:"#FFD24A", cat:"crunchy", cheer:"¡Orale! 🌮"},
-    {name:"PEPINO LIMÓN",   sub:"paleta · cooling & bright",    icon:"🥒", c1:"#C7FF2F", c2:"#7DD957", cat:"icy",     cheer:"¡Fresquísimo! 🥒"},
-    {name:"QUESABIRRIA",    sub:"snack · cheesy & crunchy",     icon:"🧀", c1:"#E8336F", c2:"#C72359", cat:"crunchy", cheer:"¡Con consomé! 🔥"},
-    {name:"TRES LECHES",    sub:"ice cream · rich & creamy",    icon:"🍦", c1:"#F4D58D", c2:"#E8C383", cat:"creamy",  cheer:"¡Dulcísimo! 🍦"},
-    {name:"ELOTE LOCO",     sub:"snack · chili-lime crunch",    icon:"🌽", c1:"#FFD24A", c2:"#FF7A1A", cat:"crunchy", cheer:"¡Bien loco! 🌽"},
-    {name:"PALETA FRESA",   sub:"paleta · classic fruity",      icon:"🍡", c1:"#FF2E9A", c2:"#FF6BB0", cat:"fruity",  cheer:"¡Clásico! 🍡"},
-    {name:"RASPADO LIMÓN",  sub:"raspado · icy & tangy",        icon:"🍋", c1:"#C7FF2F", c2:"#9CD3FF", cat:"icy",     cheer:"¡Bien frío! 🧊"},
+    {name:"MANGO CHAMOY",   sub:"paleta · sun-ripe mango",      sub_es:"paleta · mango maduro",        icon:"🥭", c1:"#FF7A1A", c2:"#FFD24A", cat:"fruity",  cheer:"¡Eso! 🎉"},
+    {name:"FRESA C/ CREMA", sub:"paleta · strawberry & cream",  sub_es:"paleta · fresa con crema",     icon:"🍓", c1:"#FF1F8F", c2:"#FF9EC8", cat:"creamy",  cheer:"¡Qué rico! 🍓"},
+    {name:"MANGONADA",      sub:"raspado · spicy-sweet loaded",  sub_es:"raspado · dulce y picosita",  icon:"🌶️", c1:"#FF7A1A", c2:"#E8336F", cat:"icy",     cheer:"¡Ándale! 🌶️"},
+    {name:"WALKING TACO",   sub:"snack · crunchy midnight fuel", sub_es:"antojo · crujiente y sabroso", icon:"🌮", c1:"#7CB94A", c2:"#FFD24A", cat:"crunchy", cheer:"¡Órale! 🌮"},
+    {name:"PEPINO LIMÓN",   sub:"paleta · cooling & bright",    sub_es:"paleta · fresca y cítrica",    icon:"🥒", c1:"#C7FF2F", c2:"#7DD957", cat:"icy",     cheer:"¡Fresquísimo! 🥒"},
+    {name:"QUESABIRRIA",    sub:"snack · cheesy & crunchy",     sub_es:"antojo · con queso y crujiente",icon:"🧀", c1:"#E8336F", c2:"#C72359", cat:"crunchy", cheer:"¡Con consomé! 🔥"},
+    {name:"TRES LECHES",    sub:"ice cream · rich & creamy",    sub_es:"helado · rico y cremoso",      icon:"🍦", c1:"#F4D58D", c2:"#E8C383", cat:"creamy",  cheer:"¡Dulcísimo! 🍦"},
+    {name:"ELOTE LOCO",     sub:"snack · chili-lime crunch",    sub_es:"antojo · chile, limón y crunch",icon:"🌽", c1:"#FFD24A", c2:"#FF7A1A", cat:"crunchy", cheer:"¡Bien loco! 🌽"},
+    {name:"PALETA FRESA",   sub:"paleta · classic fruity",      sub_es:"paleta · frutal clásica",      icon:"🍡", c1:"#FF2E9A", c2:"#FF6BB0", cat:"fruity",  cheer:"¡Clásico! 🍡"},
+    {name:"RASPADO LIMÓN",  sub:"raspado · icy & tangy",        sub_es:"raspado · helado y ácido",     icon:"🍋", c1:"#C7FF2F", c2:"#9CD3FF", cat:"icy",     cheer:"¡Bien frío! 🧊"},
   ];
+  const wheelSub = it => (I18N.lang === 'es' && it.sub_es) ? it.sub_es : it.sub;
 
   const WEDGE_COLORS = [
     ["#C72359","#E8336F"],["#FF7A1A","#FFD24A"],["#7CB94A","#C7FF2F"],["#FF1F8F","#FF6BB0"],
@@ -1759,6 +2328,8 @@ const REVIEWS = [
   let rotation = 0;
   let filterRotation = 0;
   let spinning = false;
+  let lastResult = null;
+  let touched = false; // user changed category or spun at least once
   let wedgePaths = [], labelGroups = [], filterWheelEls = [];
 
   function splitWheelLabel(name){
@@ -1909,9 +2480,9 @@ const REVIEWS = [
       rotation=0; filterRotation=0; svg.style.transition='none'; svg.style.transform='rotate(0deg)';
       buildWheel();
       readoutEl.classList.remove('revealed');
-      roName.textContent='SPIN TO PICK';
-      const catLabels={all:'all vibes',fruity:'fruity picks',creamy:'creamy picks',crunchy:'crunchy picks',icy:'icy picks'};
-      roSub.textContent=ITEMS.length+' options · '+catLabels[activeCat];
+      lastResult=null; touched=true;
+      roName.textContent=I18N.t('wheel.ro.name');
+      roSub.textContent=ITEMS.length+' '+I18N.t('wheel.opts')+' · '+I18N.t('wheel.cat.'+activeCat);
       roCheer.textContent='';
     });
   });
@@ -1925,7 +2496,8 @@ const REVIEWS = [
 
   function spin(){
     if(spinning||ITEMS.length===0) return;
-    spinning=true; spinBtn.disabled=true; spinBtn.textContent='⏳ SPINNING...';
+    touched=true;
+    spinning=true; spinBtn.disabled=true; spinBtn.textContent=I18N.t('wheel.spinning');
     readoutEl.classList.remove('revealed');
     const N=ITEMS.length, seg=360/N;
     const target=Math.floor(Math.random()*N);
@@ -1952,15 +2524,32 @@ const REVIEWS = [
     setTimeout(()=>{
       const it=ITEMS[target];
       roSwatch.style.background=`linear-gradient(135deg,${WEDGE_COLORS[target%WEDGE_COLORS.length][0]},${WEDGE_COLORS[target%WEDGE_COLORS.length][1]})`;
-      roSwatch.textContent=it.icon; roName.textContent=it.name; roSub.textContent=it.sub;
+      roSwatch.textContent=it.icon; roName.textContent=it.name; roSub.textContent=wheelSub(it);
       roCheer.textContent=it.cheer; readoutEl.classList.add('revealed'); fireConfetti();
+      lastResult=it;
       pinEl.classList.remove('bounce'); void pinEl.offsetWidth; pinEl.classList.add('bounce');
       setTimeout(()=>pinEl.classList.remove('bounce'),800);
-      spinBtn.disabled=false; spinBtn.textContent='★ SPIN AGAIN ★'; spinning=false;
+      spinBtn.disabled=false; spinBtn.textContent=I18N.t('wheel.spin.again'); spinning=false;
     },spinSeconds*1000+100);
   }
 
   spinBtn.addEventListener('click', spin);
+
+  // Re-render language-dependent wheel text on language change (wheel fully owns roName/roSub)
+  I18N.onChange(function(){
+    if(!spinning){
+      spinBtn.textContent = readoutEl.classList.contains('revealed') ? I18N.t('wheel.spin.again') : I18N.t('wheel.spin');
+    }
+    if(readoutEl.classList.contains('revealed') && lastResult){
+      roSub.textContent = wheelSub(lastResult); // name + cheer are language-neutral
+    } else if(touched){
+      roName.textContent = I18N.t('wheel.ro.name');
+      roSub.textContent = ITEMS.length + ' ' + I18N.t('wheel.opts') + ' · ' + I18N.t('wheel.cat.' + activeCat);
+    } else {
+      roName.textContent = I18N.t('wheel.ro.name');
+      roSub.textContent = I18N.t('wheel.ro.sub');
+    }
+  });
 
   let lastShake=0;
   if(window.DeviceMotionEvent){
@@ -1989,23 +2578,32 @@ const REVIEWS = [
     [12, 22], // Fri
     [12, 22], // Sat
   ];
-  const NEXT_OPEN = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  // [Sun..Sat] day abbreviations per language for "opens <Day>"
+  const DAY_NAMES = {
+    en: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+    es: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+  };
   const now = new Date();
   const day = now.getDay();
   const h = now.getHours() + now.getMinutes()/60;
   const [open, close] = HOURS[day];
   const isOpen = h >= open && h < close;
-  const dot = el.querySelector('.status-dot');
   const txt = el.querySelector('.status-text');
-  if (isOpen) {
-    el.className = 'status-badge status-open';
-    txt.textContent = 'OPEN NOW';
-  } else {
-    el.className = 'status-badge status-closed';
-    const fmt = hr => hr === 12 ? '12PM' : hr < 12 ? hr+'AM' : (hr-12)+'PM';
-    let nextDay = (day + 1) % 7;
-    txt.textContent = `CLOSED · opens ${NEXT_OPEN[nextDay]} ${fmt(HOURS[nextDay][0])}`;
+  const fmt = hr => hr === 12 ? '12PM' : hr < 12 ? hr+'AM' : (hr-12)+'PM';
+  const nextDay = (day + 1) % 7;
+
+  function renderStatus(){
+    if (isOpen) {
+      el.className = 'status-badge status-open';
+      txt.textContent = I18N.t('status.open');
+    } else {
+      el.className = 'status-badge status-closed';
+      const dayName = (DAY_NAMES[I18N.lang] || DAY_NAMES.en)[nextDay];
+      txt.textContent = I18N.t('status.closed') + dayName + ' ' + fmt(HOURS[nextDay][0]);
+    }
   }
+  renderStatus();
+  I18N.onChange(renderStatus);
 })();
 
 // ============================ SCROLL REVEAL + STAT COUNTERS ============================
@@ -2089,55 +2687,59 @@ const REVIEWS = [
   const TAX = 0.0775;
 
   const ITEMS = [
-    {name:'Mangonada',            desc:'sorbet · chamoy · tajín',       color:'#FF7A1A', price:7.49},
-    {name:'Bionico',              desc:'fruits · cream · granola',       color:'#7DD957', price:9.99},
-    {name:'Fresas con Crema',     desc:'strawberries · sweet cream',     color:'#FF2E93', price:7.99},
-    {name:'Fruit Cup',            desc:'mixed fruits · tajín · chamoy',  color:'#FFB627', price:8.99},
-    {name:'Banana Split',         desc:'banana · 3 scoops · toppings',  color:'#F4D58D', price:10.99},
-    {name:'Fresas con Cheesecake',desc:'strawberries · cheesecake bites',color:'#FF6BB0', price:8.99},
+    {name:'Mangonada',            name_es:'Mangonada',            desc:'sorbet · chamoy · tajín',        desc_es:'nieve · chamoy · tajín',        color:'#FF7A1A', price:7.49},
+    {name:'Bionico',              name_es:'Bionico',              desc:'fruits · cream · granola',       desc_es:'frutas · crema · granola',      color:'#7DD957', price:9.99},
+    {name:'Fresas con Crema',     name_es:'Fresas con Crema',     desc:'strawberries · sweet cream',     desc_es:'fresas · crema dulce',          color:'#FF2E93', price:7.99},
+    {name:'Fruit Cup',            name_es:'Vaso de Fruta',        desc:'mixed fruits · tajín · chamoy',  desc_es:'frutas · tajín · chamoy',       color:'#FFB627', price:8.99},
+    {name:'Banana Split',         name_es:'Banana Split',         desc:'banana · 3 scoops · toppings',   desc_es:'plátano · 3 bolas · toppings',  color:'#F4D58D', price:10.99},
+    {name:'Fresas con Cheesecake',name_es:'Fresas con Cheesecake',desc:'strawberries · cheesecake bites',desc_es:'fresas · trozos de cheesecake', color:'#FF6BB0', price:8.99},
   ];
 
   const STEPS = [
-    { key:'base', no:'01', heading:'Choose your base', sub:'Start cold. Pick the canvas.', multi:false,
+    { key:'base', no:'01', heading:'Choose your base', heading_es:'Elige tu base', sub:'Start cold. Pick the canvas.', sub_es:'Empieza frío. Elige el lienzo.', multi:false,
       options:[
-        {name:'Mango Sorbet',        desc:'sweet · sunny',     color:'#FFB627', price:0},
-        {name:'Strawberry Sorbet',   desc:'berry · pink',      color:'#FF6BB0', price:0},
-        {name:'Watermelon Nieve',    desc:'dairy-free · light', color:'#FF6B7A', price:0},
-        {name:'Pineapple with Chili',desc:'tropical · kick',   color:'#FFE08A', price:0},
-        {name:'Chamango',            desc:'mango · chamoy',    color:'#FF7A1A', price:0},
-        {name:'Cucumber with Chili', desc:'cool · spicy',      color:'#7DD957', price:0},
+        {name:'Mango Sorbet',        name_es:'Nieve de Mango',     desc:'sweet · sunny',      desc_es:'dulce · soleado',     color:'#FFB627', price:0},
+        {name:'Strawberry Sorbet',   name_es:'Nieve de Fresa',     desc:'berry · pink',       desc_es:'fresa · rosa',        color:'#FF6BB0', price:0},
+        {name:'Watermelon Nieve',    name_es:'Nieve de Sandía',    desc:'dairy-free · light', desc_es:'sin lácteos · ligera',color:'#FF6B7A', price:0},
+        {name:'Pineapple with Chili',name_es:'Piña con Chile',     desc:'tropical · kick',    desc_es:'tropical · picosita', color:'#FFE08A', price:0},
+        {name:'Chamango',            name_es:'Chamango',           desc:'mango · chamoy',     desc_es:'mango · chamoy',      color:'#FF7A1A', price:0},
+        {name:'Cucumber with Chili', name_es:'Pepino con Chile',   desc:'cool · spicy',       desc_es:'fresco · picosito',   color:'#7DD957', price:0},
       ]
     },
-    { key:'fruit', no:'02', heading:'Pile on the fruit', sub:'Real, fresh, hand-cut.', multi:true,
+    { key:'fruit', no:'02', heading:'Pile on the fruit', heading_es:'Llénala de fruta', sub:'Real, fresh, hand-cut.', sub_es:'Real, fresca, cortada a mano.', multi:true,
       options:[
-        {name:'Mango',       desc:'diced',   color:'#FFB627', price:1.00},
-        {name:'Strawberry',  desc:'halved',  color:'#FF2E93', price:1.00},
-        {name:'Watermelon',  desc:'cubed',   color:'#FF6B7A', price:1.00},
-        {name:'Pineapple',   desc:'cubed',   color:'#FFE08A', price:1.00},
-        {name:'Cucumber',    desc:'sliced',  color:'#7DD957', price:0.75},
-        {name:'Kiwi',        desc:'sliced',  color:'#5DB340', price:1.25},
+        {name:'Mango',       name_es:'Mango',     desc:'diced',   desc_es:'en cubos',    color:'#FFB627', price:1.00},
+        {name:'Strawberry',  name_es:'Fresa',     desc:'halved',  desc_es:'en mitades',  color:'#FF2E93', price:1.00},
+        {name:'Watermelon',  name_es:'Sandía',    desc:'cubed',   desc_es:'en cubos',    color:'#FF6B7A', price:1.00},
+        {name:'Pineapple',   name_es:'Piña',      desc:'cubed',   desc_es:'en cubos',    color:'#FFE08A', price:1.00},
+        {name:'Cucumber',    name_es:'Pepino',    desc:'sliced',  desc_es:'rebanado',    color:'#7DD957', price:0.75},
+        {name:'Kiwi',        name_es:'Kiwi',      desc:'sliced',  desc_es:'rebanado',    color:'#5DB340', price:1.25},
       ]
     },
-    { key:'sauce', no:'03', heading:'The chamoy moment', sub:'Sauce, spice, salt. The soul.', multi:true,
+    { key:'sauce', no:'03', heading:'The chamoy moment', heading_es:'El momento del chamoy', sub:'Sauce, spice, salt. The soul.', sub_es:'Salsa, chile, sal. El alma.', multi:true,
       options:[
-        {name:'Chamoy',     desc:'sweet-tart',    color:'#D7263D', price:0.50},
-        {name:'Tajín',      desc:'chili-lime',    color:'#C0392B', price:0.50},
-        {name:'Valentina',  desc:'hot · vinegar', color:'#A01B30', price:0.50},
-        {name:'Lime juice', desc:'fresh',         color:'#7DD957', price:0.25},
-        {name:'Lechera',    desc:'sweet milk',    color:'#FFF0C8', price:0.50},
+        {name:'Chamoy',     name_es:'Chamoy',        desc:'sweet-tart',    desc_es:'agridulce',     color:'#D7263D', price:0.50},
+        {name:'Tajín',      name_es:'Tajín',         desc:'chili-lime',    desc_es:'chile y limón', color:'#C0392B', price:0.50},
+        {name:'Valentina',  name_es:'Valentina',     desc:'hot · vinegar', desc_es:'picante · vinagre',color:'#A01B30', price:0.50},
+        {name:'Lime juice', name_es:'Jugo de Limón', desc:'fresh',         desc_es:'fresco',        color:'#7DD957', price:0.25},
+        {name:'Lechera',    name_es:'Lechera',       desc:'sweet milk',    desc_es:'leche dulce',   color:'#FFF0C8', price:0.50},
       ]
     },
-    { key:'topper', no:'04', heading:'Crown it', sub:'Make it yours.', multi:true,
+    { key:'topper', no:'04', heading:'Crown it', heading_es:'Corónala', sub:'Make it yours.', sub_es:'Hazla tuya.', multi:true,
       options:[
-        {name:'Tamarindo straw',  desc:'chili-coated',   color:'#8B4513', price:1.00, straw:true},
-        {name:'Gummy worms',      desc:'chamoy-coated',  color:'#FF2E93', price:0.75},
-        {name:'Chili-salt rim',   desc:'crunchy',        color:'#D7263D', price:0.50},
-        {name:'Whipped cream',    desc:'cloud',          color:'#FFF6E5', price:0.50},
-        {name:'Rainbow sprinkle', desc:'festive',        color:'#7DD957', price:0.25},
-        {name:'Granola',          desc:'crunchy topping',color:'#D2B48C', price:0.50},
+        {name:'Tamarindo straw',  name_es:'Popote de Tamarindo', desc:'chili-coated',    desc_es:'cubierto de chile', color:'#8B4513', price:1.00, straw:true},
+        {name:'Gummy worms',      name_es:'Gusanitos de Goma',   desc:'chamoy-coated',   desc_es:'con chamoy',        color:'#FF2E93', price:0.75},
+        {name:'Chili-salt rim',   name_es:'Escarchado de Chile', desc:'crunchy',         desc_es:'crujiente',         color:'#D7263D', price:0.50},
+        {name:'Whipped cream',    name_es:'Crema Batida',        desc:'cloud',           desc_es:'esponjosa',         color:'#FFF6E5', price:0.50},
+        {name:'Rainbow sprinkle', name_es:'Chispas de Colores',  desc:'festive',         desc_es:'festivas',          color:'#7DD957', price:0.25},
+        {name:'Granola',          name_es:'Granola',             desc:'crunchy topping', desc_es:'topping crujiente', color:'#D2B48C', price:0.50},
       ]
     },
   ];
+  const bName = o => (I18N.lang === 'es' && o.name_es) ? o.name_es : o.name;
+  const bDesc = o => (I18N.lang === 'es' && o.desc_es) ? o.desc_es : o.desc;
+  const bHeading = s => (I18N.lang === 'es' && s.heading_es) ? s.heading_es : s.heading;
+  const bSub = s => (I18N.lang === 'es' && s.sub_es) ? s.sub_es : s.sub;
 
   const pickerEl = document.getElementById('bldItemPicker');
   const stage    = document.querySelector('.bld-stage');
@@ -2151,7 +2753,9 @@ const REVIEWS = [
   const barcode  = document.getElementById('bldBarcode');
   if (!panel) return;
 
-  if (rcptOrderNo) rcptOrderNo.textContent = 'ORDER #'+Math.floor(10000+Math.random()*89999)+' · BUILD-YOUR-OWN';
+  const orderSeq = Math.floor(10000+Math.random()*89999);
+  function setOrderNo(){ if (rcptOrderNo) rcptOrderNo.textContent = I18N.t('bld.ordno')+orderSeq+I18N.t('bld.byo'); }
+  setOrderNo();
   if (barcode) {
     const ws = [2,1,3,1,2,1,1,3,2,1,2,3,1,1,2,3,1,2,1,3,2,1,1,2,1,3,2,1,2,1];
     ws.forEach((w,i)=>{ const b=document.createElement('span'); b.style.width=w+'px'; b.style.height=(i%5===0?32:i%3===0?28:22)+'px'; barcode.appendChild(b); });
@@ -2181,17 +2785,17 @@ const REVIEWS = [
   }
 
   function rcptRow(name, price, isBase){
-    const priceStr = isBase ? '$'+price.toFixed(2) : (price===0?'incl.':'+$'+price.toFixed(2));
+    const priceStr = isBase ? '$'+price.toFixed(2) : (price===0?I18N.t('bld.incl'):'+$'+price.toFixed(2));
     return `<div class="bld-rcpt-line"><span class="bld-rcpt-item-name">${name}</span><span class="bld-rcpt-dots"></span><span class="bld-rcpt-price">${priceStr}</span></div>`;
   }
 
   function updateReceipt(){
     const r0=$('r0'),r1=$('r1'),r2=$('r2'),r3=$('r3'),r4=$('r4');
-    if(r0) r0.innerHTML = picks.item ? rcptRow(picks.item.name,picks.item.price,true) : '<div class="bld-rcpt-empty">—</div>';
-    if(r1) r1.innerHTML = picks.base ? rcptRow(picks.base.name,picks.base.price) : '<div class="bld-rcpt-empty">—</div>';
-    if(r2) r2.innerHTML = picks.fruit.length  ? picks.fruit.map(f=>rcptRow(f.name,f.price)).join('')  : '<div class="bld-rcpt-empty">—</div>';
-    if(r3) r3.innerHTML = picks.sauce.length  ? picks.sauce.map(s=>rcptRow(s.name,s.price)).join('')  : '<div class="bld-rcpt-empty">—</div>';
-    if(r4) r4.innerHTML = picks.topper.length ? picks.topper.map(t=>rcptRow(t.name,t.price)).join('') : '<div class="bld-rcpt-empty">—</div>';
+    if(r0) r0.innerHTML = picks.item ? rcptRow(bName(picks.item),picks.item.price,true) : '<div class="bld-rcpt-empty">—</div>';
+    if(r1) r1.innerHTML = picks.base ? rcptRow(bName(picks.base),picks.base.price) : '<div class="bld-rcpt-empty">—</div>';
+    if(r2) r2.innerHTML = picks.fruit.length  ? picks.fruit.map(f=>rcptRow(bName(f),f.price)).join('')  : '<div class="bld-rcpt-empty">—</div>';
+    if(r3) r3.innerHTML = picks.sauce.length  ? picks.sauce.map(s=>rcptRow(bName(s),s.price)).join('')  : '<div class="bld-rcpt-empty">—</div>';
+    if(r4) r4.innerHTML = picks.topper.length ? picks.topper.map(t=>rcptRow(bName(t),t.price)).join('') : '<div class="bld-rcpt-empty">—</div>';
     let sub = picks.item ? picks.item.price : 0;
     picks.fruit.forEach(x=>sub+=x.price); picks.sauce.forEach(x=>sub+=x.price); picks.topper.forEach(x=>sub+=x.price);
     const tax=sub*TAX, total=sub+tax;
@@ -2209,14 +2813,14 @@ const REVIEWS = [
     if(!pickerEl) return;
     pickerEl.innerHTML = `
       <div class="bld-item-picker">
-        <div class="bld-item-picker-label">Step 0 — What are you building?</div>
+        <div class="bld-item-picker-label">${I18N.t('bld.step0')}</div>
         <div class="bld-item-grid">
           ${ITEMS.map((item,i)=>`
             <button class="bld-item-card${picks.item&&picks.item.name===item.name?' selected':''}" data-i="${i}">
               <span class="bld-item-card-dot" style="background:${item.color}"></span>
-              <span class="bld-item-card-name">${item.name}</span>
+              <span class="bld-item-card-name">${bName(item)}</span>
               <span class="bld-item-card-price">$${item.price.toFixed(2)}</span>
-              <span class="bld-item-card-desc">${item.desc}</span>
+              <span class="bld-item-card-desc">${bDesc(item)}</span>
             </button>
           `).join('')}
         </div>
@@ -2242,7 +2846,7 @@ const REVIEWS = [
       const cls=i===step?'bld-tab active':cnt>0?'bld-tab done':'bld-tab';
       return `<button class="${cls}" data-i="${i}">
         <div class="bld-tab-row"><span class="bld-tab-no">${s.no}</span>${cnt>0?`<span class="bld-tab-badge">${cnt}</span>`:''}</div>
-        <div class="bld-tab-name">${s.heading.split(' ').slice(0,3).join(' ')}</div>
+        <div class="bld-tab-name">${bHeading(s).split(' ').slice(0,3).join(' ')}</div>
       </button>`;
     }).join('');
     tabsEl.querySelectorAll('.bld-tab').forEach(btn=>{
@@ -2259,21 +2863,21 @@ const REVIEWS = [
       const sel=isMulti?picks[s.key].some(x=>x.name===o.name):(picks[s.key]&&picks[s.key].name===o.name);
       return `<div class="bld-option${sel?' selected':''}" data-idx="${idx}">
         <span class="bld-opt-swatch" style="background:${o.color}"></span>
-        <span class="bld-opt-info"><span class="bld-opt-name">${o.name}</span><span class="bld-opt-desc">${o.desc}</span></span>
-        <span class="bld-opt-price">${o.price===0?'incl.':'+$'+o.price.toFixed(2)}</span>
+        <span class="bld-opt-info"><span class="bld-opt-name">${bName(o)}</span><span class="bld-opt-desc">${bDesc(o)}</span></span>
+        <span class="bld-opt-price">${o.price===0?I18N.t('bld.incl'):'+$'+o.price.toFixed(2)}</span>
         <span class="bld-opt-check">${sel?'✓':'+'}</span>
       </div>`;
     }).join('');
     const dotHtml=STEPS.map((_,i)=>`<span class="bld-dot${i<step?' done':i===step?' active':''}"></span>`).join('');
     panel.innerHTML=`
       <div class="bld-step-num">${s.no}</div>
-      <h3 class="bld-step-title">${s.heading}</h3>
-      <p class="bld-step-sub">${s.sub}</p>
+      <h3 class="bld-step-title">${bHeading(s)}</h3>
+      <p class="bld-step-sub">${bSub(s)}</p>
       <div id="bldOptList">${optHtml}</div>
       <div class="bld-nav">
-        <button class="bld-btn-back" id="bldBack" ${step===0?'disabled':''}>← Back</button>
+        <button class="bld-btn-back" id="bldBack" ${step===0?'disabled':''}>${I18N.t('bld.back')}</button>
         <div class="bld-dots">${dotHtml}</div>
-        <button class="bld-btn-next" id="bldNext" ${!canAdvance()?'disabled':''}>${step<STEPS.length-1?'Next →':'Done ✓'}</button>
+        <button class="bld-btn-next" id="bldNext" ${!canAdvance()?'disabled':''}>${step<STEPS.length-1?I18N.t('bld.next'):I18N.t('bld.done')}</button>
       </div>`;
     panel.querySelectorAll('.bld-option').forEach(row=>{
       row.addEventListener('click',()=>{
@@ -2298,6 +2902,14 @@ const REVIEWS = [
   renderItemPicker();
   lockStage(true);
   renderTabs(); renderPanel(); updateReceipt();
+
+  // Re-render builder on language change (preserves current picks & step)
+  I18N.onChange(function(){
+    setOrderNo();
+    renderItemPicker();
+    renderTabs(); renderPanel();
+    updateLegend(); updateReceipt();
+  });
 })();
 
 // ============================ REVIEWS RAIL ============================
