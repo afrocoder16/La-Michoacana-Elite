@@ -3,3 +3,11 @@
 # Proposal / internal documents — not part of the published site
 Midvora_LaMichoacanaElite_Proposal.pdf
 *.pdf
+
+# Local dev / image-optimization artifacts (not part of the published site)
+node_modules/
+package.json
+package-lock.json
+convert-images.js
+_img_mapping.json
+assets/_originals/
