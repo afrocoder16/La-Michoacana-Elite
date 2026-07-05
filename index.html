@@ -212,9 +212,9 @@
     padding:14px 24px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
     border:0;transition:transform .15s}
   .btn-primary{background:var(--acid);color:var(--ink);box-shadow:0 0 0 2px var(--ink),4px 4px 0 var(--hot)}
-  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 2px var(--ink),6px 6px 0 var(--hot)}
+  @media (hover:hover){.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:0 0 0 2px var(--ink),6px 6px 0 var(--hot)}}
   .btn-ghost{background:transparent;color:var(--bone);border:2px solid var(--bone)}
-  .btn-ghost:hover{background:var(--bone);color:var(--ink)}
+  @media (hover:hover){.btn-ghost:hover{background:var(--bone);color:var(--ink)}}
 
   .hero-stats{display:flex;flex-direction:column;gap:14px;align-items:flex-end;text-align:right}
   @media (max-width:800px){.hero-stats{align-items:flex-start;text-align:left}}
@@ -520,7 +520,7 @@
     max-width:1380px;margin:0 auto;display:grid;grid-template-columns:minmax(520px,620px) minmax(420px,560px);gap:72px;align-items:center;justify-content:center;
     position:relative;z-index:2
   }
-  @media (max-width:900px){.wheel-stage{display:flex;flex-direction:column;gap:24px;align-items:center}.wheel-side{order:1;max-width:680px;width:100%;margin:0 auto}.wheel-wrap{order:2;max-width:min(86vw,420px);margin:0 auto;grid-column:auto;grid-row:auto}.wheel-shake-hint{order:3;place-self:center;grid-column:auto;grid-row:auto}}
+  @media (max-width:900px){.wheel-stage{display:flex;flex-direction:column;gap:24px;align-items:center}.wheel-side{order:1;max-width:680px;width:100%;margin:0 auto}.wheel-wrap{order:2;max-width:min(86vw,420px);margin:0 auto;grid-column:auto;grid-row:auto}}
   @media (max-width:640px){.wheel-stage{gap:18px}.wheel-side{max-width:100%}.wheel-wrap{max-width:min(88vw,360px)}}
 
   .wheel-wrap{position:relative;aspect-ratio:1;max-width:620px;margin:0;width:100%;grid-column:1;grid-row:1}
@@ -568,13 +568,6 @@
   .wheel-tag{position:absolute;font-family:"Caveat",cursive;font-size:22px;color:var(--bone);pointer-events:none;line-height:1}
   .wheel-tag.t1{top:-10px;right:-8px;color:var(--acid);transform:rotate(10deg)}
   .wheel-tag.t2{bottom:4px;left:-18px;color:var(--hot);transform:rotate(-11deg)}
-
-  .wheel-shake-hint{display:none;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--acid);opacity:.75;text-align:center;
-    margin-top:10px;padding:6px 12px;border:1px dashed var(--acid);border-radius:999px;
-    width:fit-content;margin-inline:auto}
-  .wheel-shake-hint{grid-column:1;grid-row:2}
-  @media (hover:none){.wheel-shake-hint{display:block}}
 
   .wheel-side{position:relative;z-index:2;max-width:560px;width:100%;grid-column:2;grid-row:1 / span 2}
   .wheel-eyebrow{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
@@ -747,7 +740,7 @@
   .info-row .label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--acid);margin-bottom:8px;display:block}
   .info-row .val{font-family:"Bowlby One";font-size:24px;text-transform:uppercase;letter-spacing:.01em}
   .info-row a{color:inherit;text-decoration:none}
-  .info-row a:hover{color:var(--acid)}
+  @media (hover:hover){.info-row a:not(.btn):hover{color:var(--acid)}}
 
   .hours-row{display:flex;justify-content:space-between;font-family:"Space Mono",monospace;font-size:13px;font-weight:700;padding:8px 0;border-bottom:1px solid var(--line);letter-spacing:.05em}
   .hours-row:last-child{border-bottom:0}
@@ -771,6 +764,9 @@
   .footer-logo{height:72px;width:auto;object-fit:contain;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
   @media(max-width:640px){.footer-logo{height:56px}}
   footer .meta{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+  .footer-credit{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--bone);opacity:.75;text-decoration:underline;text-underline-offset:3px;transition:.15s}
+  .footer-credit:hover{opacity:1;color:var(--acid)}
   .soc{display:flex;gap:8px}
   .soc a{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--bone);display:inline-flex;align-items:center;justify-content:center;
     text-decoration:none;color:var(--bone);font-family:"Bowlby One";font-size:13px;transition:.15s}
@@ -1366,12 +1362,10 @@
       <div class="wheel-tag t1" data-i18n="wheel.tag.spin">spin me!</div>
       <div class="wheel-tag t2" data-i18n="wheel.tag.antoja">¿qué se te antoja?</div>
     </div>
-    <div class="wheel-shake-hint" data-i18n="wheel.shake">📱 shake to spin</div>
-
     <div class="wheel-side">
       <div class="wheel-eyebrow"><span class="dot"></span><span data-i18n="wheel.eyebrow">N°04 / WHEEL OF ANTOJOS</span></div>
       <h2 class="wheel-h2"><span data-i18n="wheel.h2.1">PICK</span><br/><span data-i18n="wheel.h2.2">FOR</span> <em data-i18n="wheel.h2.3">ME.</em></h2>
-      <p class="wheel-deck"><strong data-i18n="wheel.deck.shake">Shake your phone</strong><span data-i18n="wheel.deck.rest"> or hit spin — the wheel picks tonight's craving. Filter by vibe first.</span></p>
+      <p class="wheel-deck"><strong data-i18n="wheel.deck.shake">Hit spin</strong><span data-i18n="wheel.deck.rest"> — the wheel picks tonight's craving. Filter by vibe first.</span></p>
 
       <div class="wheel-modes" id="wheelModes">
         <button class="wheel-mode is-active" data-cat="all" data-i18n="wheel.mode.all">🎯 ALL</button>
@@ -1575,7 +1569,7 @@
           <span class="label" data-i18n="visit.label.order">Order online</span>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
             <a href="https://www.doordash.com/store/la-michoacana-elite-marshall-39786257/92719546/" target="_blank" rel="noopener" class="btn btn-primary">DoorDash →</a>
-            <a href="tel:5074013162" class="btn btn-ghost" style="border-color:var(--bone);color:var(--bone)" data-i18n="visit.callorder">Call to order</a>
+            <a href="tel:5074013162" class="btn btn-ghost" data-i18n="visit.callorder">Call to order</a>
           </div>
         </div>
         <div class="info-row">
@@ -1604,7 +1598,7 @@
   <div class="brand">
     <img src="assets/logo/logo-removebg.png" alt="La Michoacana Elite" class="footer-logo"/>
   </div>
-  <div class="meta"><span data-i18n="footer.meta">© 2026 · MARSHALL, MN · MADE WITH </span><span style="color:var(--hot)">♥</span></div>
+  <div class="meta"><span data-i18n="footer.meta">© 2026 · MARSHALL, MN · MADE WITH </span><span style="color:var(--hot)">♥</span><span data-i18n="footer.by"> · SITE BY </span><a class="footer-credit" href="https://midvora.com" target="_blank" rel="noopener">MIDVORA</a></div>
   <div class="soc">
     <a href="https://www.facebook.com/lamichoacanaelite507/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
     <a href="https://www.instagram.com/lamichoacanaelite507/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
@@ -1658,11 +1652,10 @@ const I18N = (function(){
       // wheel
       'wheel.tag.spin':'spin me!',
       'wheel.tag.antoja':'¿qué se te antoja?',
-      'wheel.shake':'📱 shake to spin',
       'wheel.eyebrow':'N°04 / WHEEL OF ANTOJOS',
       'wheel.h2.1':'PICK', 'wheel.h2.2':'FOR', 'wheel.h2.3':'ME.',
-      'wheel.deck.shake':'Shake your phone',
-      'wheel.deck.rest':' or hit spin — the wheel picks tonight’s craving. Filter by vibe first.',
+      'wheel.deck.shake':'Hit spin',
+      'wheel.deck.rest':' — the wheel picks tonight’s craving. Filter by vibe first.',
       'wheel.mode.all':'🎯 ALL', 'wheel.mode.fruity':'🍓 FRUITY', 'wheel.mode.creamy':'🍦 CREAMY',
       'wheel.mode.crunchy':'🌮 CRUNCHY', 'wheel.mode.icy':'🧊 ICY',
       'wheel.ro.label':'YOUR ANTOJO',
@@ -1706,6 +1699,7 @@ const I18N = (function(){
       'visit.day.monthu':'MON — THU', 'visit.day.frisat':'FRI — SAT', 'visit.day.sun':'SUNDAY',
       // footer
       'footer.meta':'© 2026 · MARSHALL, MN · MADE WITH ',
+      'footer.by':' · SITE BY ',
       // status badge
       'status.open':'OPEN NOW', 'status.closed':'CLOSED · opens ',
       // cart
@@ -1766,11 +1760,10 @@ const I18N = (function(){
       // wheel
       'wheel.tag.spin':'¡gírame!',
       'wheel.tag.antoja':'¿qué se te antoja?',
-      'wheel.shake':'📱 agita para girar',
       'wheel.eyebrow':'N°04 / RULETA DE ANTOJOS',
       'wheel.h2.1':'ELIGE', 'wheel.h2.2':'POR', 'wheel.h2.3':'MÍ.',
-      'wheel.deck.shake':'Agita tu teléfono',
-      'wheel.deck.rest':' o dale a girar — la ruleta elige el antojo de hoy. Filtra por estilo primero.',
+      'wheel.deck.shake':'Dale a girar',
+      'wheel.deck.rest':' — la ruleta elige el antojo de hoy. Filtra por estilo primero.',
       'wheel.mode.all':'🎯 TODO', 'wheel.mode.fruity':'🍓 FRUTAL', 'wheel.mode.creamy':'🍦 CREMOSO',
       'wheel.mode.crunchy':'🌮 CRUJIENTE', 'wheel.mode.icy':'🧊 HELADO',
       'wheel.ro.label':'TU ANTOJO',
@@ -1814,6 +1807,7 @@ const I18N = (function(){
       'visit.day.monthu':'LUN — JUE', 'visit.day.frisat':'VIE — SÁB', 'visit.day.sun':'DOMINGO',
       // footer
       'footer.meta':'© 2026 · MARSHALL, MN · HECHO CON ',
+      'footer.by':' · SITIO POR ',
       // status badge
       'status.open':'ABIERTO AHORA', 'status.closed':'CERRADO · abre ',
       // cart
@@ -2551,19 +2545,6 @@ window.Cart = Cart;
       roSub.textContent = I18N.t('wheel.ro.sub');
     }
   });
-
-  let lastShake=0;
-  if(window.DeviceMotionEvent){
-    window.addEventListener('devicemotion',function(e){
-      const acc=e.accelerationIncludingGravity; if(!acc) return;
-      const mag=Math.sqrt(acc.x*acc.x+acc.y*acc.y+acc.z*acc.z);
-      const now=Date.now();
-      if(mag>22&&now-lastShake>1500){lastShake=now; spin();}
-    });
-    if(typeof DeviceMotionEvent.requestPermission==='function'){
-      spinBtn.addEventListener('click',function reqM(){DeviceMotionEvent.requestPermission().catch(()=>{}); spinBtn.removeEventListener('click',reqM);},{once:true});
-    }
-  }
 })();
 
 // ============================ LIVE OPEN/CLOSED STATUS ============================
