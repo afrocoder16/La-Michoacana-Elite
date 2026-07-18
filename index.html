@@ -425,7 +425,7 @@
   .poster-line-accent{color:var(--hot);font-style:italic}
   .poster-line-bottom{color:var(--orange)}
   .poster-deck{font-family:"Bricolage Grotesque";font-size:18px;line-height:1.52;max-width:54ch;margin:0;color:#2A1810;opacity:.75;text-wrap:pretty}
-  .poster-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .poster-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   @media (max-width:560px){.poster-meta{grid-template-columns:1fr}}
   .poster-meta div{
     padding:15px 16px;border-radius:16px;border:1.5px solid rgba(42,24,16,.15);
@@ -1235,17 +1235,18 @@
   <div class="poster-frame">
     <div class="poster-grid">
       <div class="poster-copy">
-        <div class="poster-eyebrow"><span class="bar"></span><span data-i18n="promo.eyebrow">THURSDAY SPECIAL · EVERY WEEK</span></div>
+        <div class="poster-eyebrow"><span class="bar"></span><span data-i18n="promo.eyebrow">CRAZY DAYS · OUR BEST DEALS OF THE YEAR</span></div>
         <h2 class="poster-name">
-          <span class="poster-line poster-line-top" data-i18n="promo.name.1">IT'S THE</span>
-          <span class="poster-line poster-line-accent" data-i18n="promo.name.2">Thursday Special</span>
-          <span class="poster-line poster-line-bottom" data-i18n="promo.name.3">DEALS ARE ON!</span>
+          <span class="poster-line poster-line-top" data-i18n="promo.name.1">IT'S OUR</span>
+          <span class="poster-line poster-line-accent" data-i18n="promo.name.2">Crazy Days</span>
+          <span class="poster-line poster-line-bottom" data-i18n="promo.name.3">BEST DEALS EVER!</span>
         </h2>
-        <p class="poster-deck" data-i18n="promo.deck">Buy one agua fresca, get the second 50% off — and all paletas are 10 for $25, mix & match your favorite flavors. Made fresh with quality ingredients, no fake flavorings.</p>
+        <p class="poster-deck" data-i18n="promo.deck">Free small agua fresca with any mini pancakes order, 10 paletas for $25, buy any agua fresca get the 2nd 50% off, and $2 off our fresh fruit cups. Come cool off with us!</p>
         <div class="poster-meta">
-          <div><b data-i18n="promo.meta.1b">AGUA FRESCA</b><span data-i18n="promo.meta.1s">buy 1, get 2nd 50% off</span></div>
-          <div><b data-i18n="promo.meta.2b">PALETAS</b><span data-i18n="promo.meta.2s">10 for $25</span></div>
-          <div><b data-i18n="promo.meta.3b">MIX & MATCH</b><span data-i18n="promo.meta.3s">your favorite flavors</span></div>
+          <div><b data-i18n="promo.meta.1b">MINI PANCAKES</b><span data-i18n="promo.meta.1s">free small agua fresca</span></div>
+          <div><b data-i18n="promo.meta.2b">10 PALETAS</b><span data-i18n="promo.meta.2s">for $25</span></div>
+          <div><b data-i18n="promo.meta.3b">AGUA FRESCA</b><span data-i18n="promo.meta.3s">buy 1, get 2nd 50% off</span></div>
+          <div><b data-i18n="promo.meta.4b">FRESH FRUIT CUPS</b><span data-i18n="promo.meta.4s">$2 off</span></div>
         </div>
         <div class="hero-ctas" style="margin-top:32px">
           <a class="btn btn-primary" href="#order" data-i18n="promo.cta.order">Order now →</a>
@@ -1258,11 +1259,11 @@
         <div class="poster-promo-main" id="promoMain">
           <img
             src="assets/promo/promo-featured.webp"
-            alt="Thursday Special — buy one agua fresca get the second 50% off, all paletas 10 for $25"
+            alt="Crazy Days — our best deals of the year: free agua fresca with mini pancakes, 10 paletas for $25, 2nd agua fresca 50% off, $2 off fresh fruit cups"
             loading="lazy"
             onerror="this.parentElement.style.display='none';document.getElementById('promoFallback').style.display='flex'"
           />
-          <span class="poster-promo-label" data-i18n="promo.label">THURSDAY SPECIAL</span>
+          <span class="poster-promo-label" data-i18n="promo.label">CRAZY DAYS</span>
         </div>
         <div class="poster-placeholder" id="promoFallback" style="display:none">
           <div class="poster-placeholder-icon">🎆🍦</div>
@@ -1627,17 +1628,18 @@ const I18N = (function(){
       'hero.sticker.chamoy':'CHAMOY DRIP ☻',
       'hero.sticker.doordash':'DOORDASH IN 25 MIN',
       // promo / this month (static fallback copy)
-      'promo.eyebrow':'THURSDAY SPECIAL · EVERY WEEK',
+      'promo.eyebrow':'CRAZY DAYS · OUR BEST DEALS OF THE YEAR',
       'promo.pill':'Today',
       'promo.cta.order':'Order now →',
       'promo.cta.menu':'See full menu',
       'promo.caption':'Share this with the group chat',
-      'promo.name.1':'IT\'S THE', 'promo.name.2':'Thursday Special', 'promo.name.3':'DEALS ARE ON!',
-      'promo.deck':'Buy one agua fresca, get the second 50% off — and all paletas are 10 for $25, mix & match your favorite flavors. Made fresh with quality ingredients, no fake flavorings.',
-      'promo.meta.1b':'AGUA FRESCA', 'promo.meta.1s':'buy 1, get 2nd 50% off',
-      'promo.meta.2b':'PALETAS', 'promo.meta.2s':'10 for $25',
-      'promo.meta.3b':'MIX & MATCH', 'promo.meta.3s':'your favorite flavors',
-      'promo.label':'THURSDAY SPECIAL', 'promo.board.caption':'Share this with the group chat',
+      'promo.name.1':'IT\'S OUR', 'promo.name.2':'Crazy Days', 'promo.name.3':'BEST DEALS EVER!',
+      'promo.deck':'Free small agua fresca with any mini pancakes order, 10 paletas for $25, buy any agua fresca get the 2nd 50% off, and $2 off our fresh fruit cups. Come cool off with us!',
+      'promo.meta.1b':'MINI PANCAKES', 'promo.meta.1s':'free small agua fresca',
+      'promo.meta.2b':'10 PALETAS', 'promo.meta.2s':'for $25',
+      'promo.meta.3b':'AGUA FRESCA', 'promo.meta.3s':'buy 1, get 2nd 50% off',
+      'promo.meta.4b':'FRESH FRUIT CUPS', 'promo.meta.4s':'$2 off',
+      'promo.label':'CRAZY DAYS', 'promo.board.caption':'Share this with the group chat',
       // menu section
       'menu.no':'N°03 / MENU',
       'menu.h2.1':'PUNCH', 'menu.h2.2':'YOUR', 'menu.h2.3':'CODE.',
@@ -1735,17 +1737,18 @@ const I18N = (function(){
       'hero.sticker.chamoy':'CHORRITO DE CHAMOY ☻',
       'hero.sticker.doordash':'DOORDASH EN 25 MIN',
       // promo
-      'promo.eyebrow':'ESPECIAL DE JUEVES · TODAS LAS SEMANAS',
+      'promo.eyebrow':'CRAZY DAYS · ¡LAS MEJORES OFERTAS DEL AÑO!',
       'promo.pill':'Hoy',
       'promo.cta.order':'Ordenar ahora →',
       'promo.cta.menu':'Ver menú completo',
       'promo.caption':'Comparte esto con el chat del grupo',
-      'promo.name.1':'ES EL', 'promo.name.2':'Especial de Jueves', 'promo.name.3':'¡LAS OFERTAS ESTÁN AQUÍ!',
-      'promo.deck':'Compra una agua fresca y la segunda va al 50% de descuento — además, todas las paletas a 10 por $25, combina tus sabores favoritos. Hechas frescas con ingredientes de calidad, sin sabores artificiales.',
-      'promo.meta.1b':'AGUA FRESCA', 'promo.meta.1s':'compra 1, la 2da 50% off',
-      'promo.meta.2b':'PALETAS', 'promo.meta.2s':'10 por $25',
-      'promo.meta.3b':'COMBINA SABORES', 'promo.meta.3s':'tus favoritos',
-      'promo.label':'ESPECIAL DE JUEVES', 'promo.board.caption':'Comparte esto con el chat del grupo',
+      'promo.name.1':'SON NUESTROS', 'promo.name.2':'Crazy Days', 'promo.name.3':'¡MEJORES OFERTAS!',
+      'promo.deck':'Agua fresca pequeña gratis con cualquier orden de mini pancakes, 10 paletas por $25, compra cualquier agua fresca y la segunda va al 50% de descuento, y $2 de descuento en nuestras copas de fruta fresca. ¡Ven y refréscate con nosotros!',
+      'promo.meta.1b':'MINI PANCAKES', 'promo.meta.1s':'agua fresca pequeña gratis',
+      'promo.meta.2b':'10 PALETAS', 'promo.meta.2s':'por $25',
+      'promo.meta.3b':'AGUA FRESCA', 'promo.meta.3s':'compra 1, la 2da 50% off',
+      'promo.meta.4b':'COPAS DE FRUTA', 'promo.meta.4s':'$2 de descuento',
+      'promo.label':'CRAZY DAYS', 'promo.board.caption':'Comparte esto con el chat del grupo',
       // menu section
       'menu.no':'N°03 / MENÚ',
       'menu.h2.1':'MARCA', 'menu.h2.2':'TU', 'menu.h2.3':'CÓDIGO.',
@@ -1962,11 +1965,11 @@ const REVIEWS = [
   // Fallback — used when sheet is not configured or fetch fails
   // 5 columns: title, description, image_url, order_link, badge
   const FALLBACK = {
-    title:"IT'S THE / Thursday Special / DEALS ARE ON!",
-    description:"Buy one agua fresca, get the second 50% off — and all paletas are 10 for $25, mix & match your favorite flavors. Made fresh with quality ingredients, no fake flavorings.",
+    title:"IT'S OUR / Crazy Days / BEST DEALS EVER!",
+    description:"Free small agua fresca with any mini pancakes order, 10 paletas for $25, buy any agua fresca get the 2nd 50% off, and $2 off our fresh fruit cups. Come cool off with us!",
     image_url:"assets/promo/promo-featured.webp",
     order_link:"#order",
-    badge:"Every Thursday",
+    badge:"Best deals of the year",
   };
 
   // ── Paste your published Google Sheet CSV URL here ───────────────────────
